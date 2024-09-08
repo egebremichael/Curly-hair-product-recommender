@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Curl Guidebook</title>
+
+    <!-- CSS and Fonts -->
+    <link rel="stylesheet" href="style.css"> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@100&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Play&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Arsenal:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC&display=swap" rel="stylesheet">
+
+    <!-- Inline CSS for Adjustments -->
+    <style>
+        body {
+            margin: 10;
+            padding: 0;
+            font-family: 'Arsenal', sans-serif;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+            font-size: 20px;
+            text-align: center;
+        }
+        .navbar-brand {
+            padding-bottom: 20px;
+            font-family: 'Play', serif;
+            font-size: 10px;
+        }
+        .nav-link {
+            font-family: 'Alegreya Sans SC', sans-serif;
+            font-size: 20px;
+        }
+
+        .section-title {
+            font-family: 'Bona Nova SC', serif;
+            font-size: 58px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px; /* Adjust the gap between items if needed */
+        }
+
+        .grid-item {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: auto;
+            transition: opacity 0.3s ease;
+        }
+
+        .grid-item:hover img {
+            opacity: 0.7; /* Adjust the opacity for hover effect */
+        }
+
+
+
+        .footer {
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+
+
+        /* Button Styles */
+        .button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .button-black {
+            background-color: black;
+            color: white;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            position: fixed;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            padding: 0 20px;
+        }
+
+        .button-container a, .button-container button {
+            flex: 1;
+            margin: 0 10px;
+        }
+
+        .button-container a {
+            text-align: left;
+        }
+
+        .button-container button {
+            text-align: right;
+        }
+
+        /* Space between images and buttons */
+        .button-container {
+            margin-top: 20px;
+        }
+
+        .button4, .button5 {
+            width: 150px; /* Adjust width as needed */
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Creates 3 equal columns */
+            gap: 10px; /* Adjust spacing between images as needed */
+            justify-items: center; /* Centers items horizontally */
+            margin: 0 auto; /* Centers the grid container */
+            width: 50%; /* Adjust width as needed */
+        }
+
+        /* Make sure images are centered and not overlapping */
+        .grid-container img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover; /* Ensures images fit within their container */
+            transition: opacity 0.3s; /* Smooth transition for opacity changes */
+        }
+
+  
+        .grid-container img:hover {
+            opacity: 0.8; /* Darker on hover without color tint */
+        }
+
+        /* Highlight selected image with permanent tint */
+        .grid-container input[type="radio"]:checked + img {
+            filter: brightness(0.3); /* Darkens the image */
+        }
+
+        /* Styling for buttons */
+        .button.button4,
+        .button.button5 {
+            background-color: black; /* Black background for buttons */
+            color: white; /* White text color for buttons */
+            border: none; /* Removes default border */
+            border-radius: 5px; /* Optional: rounded corners */
+            padding: 10px 20px; /* Adjust button size */
+            cursor: pointer; /* Pointer cursor on hover */
+            text-align: center; /* Centers text inside button */
+            display: inline-block; /* Allows for spacing between buttons */
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <section id="nav-bar">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+            <div class="container-fluid">
+                <!-- Header Text -->
+                <a class="navbar-brand">The Curl Guidebook</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">RETURN TO HOME PAGE</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">ABOUT</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </section>
+
+   
+    <section class="question1"> 
+        <h1 class="display-4 text-center mb-5">CURLY HAIR SIMPLIFIED</h1>
+        <p>Caring for your waves, curls, and coils shouldn't take a PhD. Take this 1 minute quiz to help you decode your hair needs and choose the best products to achieve your hair goals. Which image looks most like your curls?</p>
+        <p>We know every head of curls is unique, so just pick the curl pattern and texture that's most similar to yours.</p>
+        <p>Don't worry about color either!</p>
+    </section>
+    
+    <section>
+        <div class="grid-container" id="messageCheckbox">
+            <label>
+                <input type="radio" id="2a" name="test" value="2a" onchange="changeId()">
+                <img src="images/2a.png"/>
+            </label>
+            <label>
+                <input type="radio" id="2b" name="test" value="2b" onchange="changeId()">
+                <img src="images/2b.png"/>
+            </label>
+            <label>
+                <input type="radio" id="2c" name="test" value="2c" onchange="changeId()">
+                <img src="images/2c.png"/>
+            </label>
+            <label>
+                <input type="radio" id="3a" name="test" value="3a" onchange="changeId()">
+                <img src="images/3a.png"/>
+            </label>
+            <label>
+                <input type="radio" id="3b" name="test" value="3b" onchange="changeId()">
+                <img src="images/3b.png"/>
+            </label>
+            <label>
+                <input type="radio" id="3c" name="test" value="3c" onchange="changeId()">
+                <img src="images/3c.png"/>
+            </label>
+            <label>
+                <input type="radio" id="4a" name="test" value="4a" onchange="changeId()">
+                <img src="images/4a.png"/>
+            </label>
+            <label>
+                <input type="radio" id="4b" name="test" value="4b" onchange="changeId()">
+                <img src="images/4b.png"/>
+            </label>
+            <label>
+                <input type="radio" id="4c" name="test" value="4c" onchange="changeId()">
+                <img src="images/4c.png"/>
+            </label>
+        </div>
+    </section>
+    
+    <a href="index.html"><button class="button button4" type="submit" id="submitBtn">Exit</button></a>
+    <button onclick="myFunction()" class="button button5" type="submit" id="submitBtn">Next</button>
+      
+    <script>
+        localStorage.setItem("checkedvalue1", null);
+        function changeId() {
+            var ele =document.querySelector('input[name="test"]:checked');    
+            localStorage.setItem("checkedvalue1", ele.value);
+        }
+
+        function myFunction() {
+            const checked1 = localStorage.getItem("checkedvalue1");
+            if (checked1 === "null") {
+                alert("Please select an option before proceeding"); 
+            }
+            else {
+                window.location ="./curly-quiz-page2.html" 
+            }
+        }
+    </script>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <p>The Curl Guidebook 2022 Ⓒ</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

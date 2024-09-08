@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planet Curls</title>
+    
+    <!-- CSS and Fonts -->
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Baskervville+SC&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@100&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Play&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Arsenal:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC&display=swap" rel="stylesheet">
+
+    <!-- Inline CSS for Adjustments -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arsenal', sans-serif;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+            font-size: 20px;
+        }
+        .navbar-brand {
+            padding-bottom: 20px;
+            font-family: 'Play', serif;
+            font-size: 10px;
+        }
+        .nav-link {
+            font-family: 'Alegreya Sans SC', sans-serif;
+            font-size: 20px;
+        }
+        .title {
+            font-family: 'Laviosa', sans-serif;
+            font-size: 0px;
+        }
+
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .carousel-caption {
+            font-family: 'Arsenal', sans-serif;
+            position: absolute; /* Keeps the caption inside its container */
+            top: 50%; /* Centers the text vertically */
+            left: 10%; /* Adjusts the distance from the left */
+            transform: translateY(-50%); /* Centers the text vertically */
+            color: #000; /* Text color */
+            text-align: left; /* Align text to the left */
+            max-width: 80%; /* Prevents the text from going too wide */
+        }
+        
+        .carousel-control-prev, .carousel-control-next {
+            width: 10%;
+        }
+
+        .changing-images {
+            position: relative;
+            width: 100%;
+            height: 100vh; /* Adjust height as needed */
+        }
+
+        .changing-images img {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .changing-images img.active {
+            display: block;
+        }
+
+        .button1 {
+            background-color: black;
+            color: white;
+            border: none;
+            font-family: 'Bona Nova SC', serif;
+            padding: 15px 30px;
+            font-size: 23px;
+        }
+
+        .button2 {
+            background-color: black;
+            color: white;
+            border: none;
+            font-family: 'Bona Nova SC', serif;
+            padding: 15px 30px;
+            font-size: 18px;
+            align-items: center;
+        }
+
+        .button1:hover {
+            background-color: #333;
+            cursor: pointer;
+        }
+
+        .card-img-top {
+            width: 100%; /* Ensure the image covers the full width of the card */
+            height: 450px; /* Set a fixed height for the image container */
+            background-size: cover; /* Ensure the image covers the container */
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Prevent image repetition */
+        }
+
+        #routine{
+            margin-top: 70px;
+        }
+        .footer {
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <section id="nav-bar">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+            <div class="container-fluid">
+                <!-- Header Text -->
+                <a class="navbar-brand">The Curl Guidebook</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#information">CURL TYPES</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="curly-quiz-page1.html">TAKE CURL QUIZ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">ABOUT</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </section>
+
+   <!-- Combined Carousel Section -->
+   <section id="carousel-section">
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <!-- First Carousel Item -->
+                <div class="carousel-item active" data-bs-interval="5000">
+                    <div class="container-fluid p-0">
+                        <div class="row gx-0">
+                            <!-- Text Column -->
+                            <div class="col-md-6 d-flex align-items-center bg-light position-relative">
+                                <div class="carousel-caption text-start p-5">
+                                    <h5 class="display-4">MEET YOUR CURL'S NEEDS</h5>
+                                    <p class="lead">We oppose the notion that one solution fits all situations. Since no two curls are alike, we created a creative quiz that will evaluate your particular hair demands and suggest a customized regimen to help you accomplish your hair objectives.</p>
+                                    <a href="curly-quiz-page1.html"><button class="btn btn-dark">Take Curly Hair Quiz</button></a>
+                                </div>
+                            </div>
+                            <!-- Image Column -->
+                            <div class="col-md-6 d-flex align-items-center">
+                                <div class="changing-images w-100">
+                                    <img src="images/ImgScrl1.png" class="changing-image active" alt="Image 1">
+                                    <img src="images/Imgscrl3.png" class="changing-image" alt="Image 2">
+                                    <img src="images/ImgScrl4.png" class="changing-image" alt="Image 3">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>                                
+                <!-- Fourth Carousel Item -->
+                <div class="carousel-item" data-bs-interval="2000">
+                    <div class="container-fluid p-0">
+                        <div class="row gx-0">
+                            <!-- Text Column -->
+                            <div class="col-md-6 d-flex align-items-center bg-light position-relative">
+                                <div class="carousel-caption text-start p-5">
+                                    <h5 class="display-4">DISCOVER THE RIGHT ROUTINE</h5>
+                                    <p class="lead">Finding the perfect routine for your unique curls is essential. Take our quiz to uncover the best products and techniques suited to your hair type.</p>
+                                    <a href="curly-quiz-page1.html"><button class="btn btn-dark">Start Now</button></a>
+                                </div>
+                            </div>
+                            <!-- Image Column -->
+                            <div class="col-md-6">
+                                <img src="images/Curly-img1.png" class="d-block w-100" alt="Image 4" style="height: 100vh; object-fit: cover;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Carousel Controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Routine Section -->
+    <section id="routine" class="carousel slide" data-bs-ride="carousel">
+        <h1 class="display-4 text-center mb-5">YOUR ROUTINE</h1>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="d-flex align-items-center justify-content-center position-relative" style="background-image: url('images/Wash.png'); background-size: cover; background-position: center; height: 70vh; width: 100%;">
+                    <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark" style="opacity: 0.8;"></div>
+                    <div class="text-center position-relative z-index-1" style="max-width: 600px; width: 100%;">
+                        <h2 class="text-light">1. Wash</h2>
+                        <p class="reg-text text-light">Dirt and build-up can clog follicles and even affect shedding and hair growth, so proper cleansing is essential for healthy hair.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="d-flex align-items-center justify-content-center position-relative" style="background-image: url('images/condition.png'); background-size: cover; background-position: center; height: 70vh; width: 100%;">
+                    <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark" style="opacity: 0.8;"></div>
+                    <div class="text-center position-relative z-index-1" style="max-width: 600px; width: 100%;">
+                        <h2 class="text-light">2. Condition</h2>
+                        <p class="reg-text text-light">Curly hair is inherently dry, so conditioning is ESSENTIAL every wash day. You should only ever detangle your hair under the shower after you have applied your conditioner, never when it's dry!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="d-flex align-items-center justify-content-center position-relative" style="background-image: url('images/moisturize.png'); background-size: cover; background-position: center; height: 70vh; width: 100%;">
+                    <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark" style="opacity: 0.8;"></div>
+                    <div class="text-center position-relative z-index-1" style="max-width: 600px; width: 100%;">
+                        <h2 class="text-light">3. Moisturize</h2>
+                        <p class="reg-text text-light">Because of its texture, curly hair struggles to maintain moisture and nourishment in between washes, so using a leave-in is key.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="d-flex align-items-center justify-content-center position-relative" style="background-image: url('images/stlying2.png'); background-size: cover; background-position: center; height: 70vh; width: 100%;">
+                    <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark" style="opacity: 0.8;"></div>
+                    <div class="text-center position-relative z-index-1" style="max-width: 600px; width: 100%;">
+                        <h2 class="text-light">4. Style</h2>
+                        <p class="reg-text text-light">For shiny, defined, bouncy curls, you need stylers. There are lots of formats: creams will provide a soft crunch-free hold, foams are great to boost volume and gels are best for high definition.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev position-absolute top-50 start-0 translate-middle-y" type="button" data-bs-target="#routine" data-bs-slide="prev" style="z-index: 1000; background-color: transparent; border: none;">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next position-absolute top-50 end-0 translate-middle-y" type="button" data-bs-target="#routine" data-bs-slide="next" style="z-index: 1000; background-color: transparent; border: none;">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </section>
+
+
+
+
+
+
+
+    <!-- JavaScript for Interactive Routine Section with Arrows -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const steps = document.querySelectorAll('.routine-step');
+            let currentStep = 0;
+
+            function showStep(stepIndex) {
+                steps.forEach((step, index) => {
+                    step.style.display = index === stepIndex ? 'block' : 'none';
+                });
+            }
+
+            document.getElementById('next-step1').addEventListener('click', function () {
+                currentStep++;
+                showStep(currentStep);
+            });
+
+            document.getElementById('prev-step2').addEventListener('click', function () {
+                currentStep--;
+                showStep(currentStep);
+            });
+
+            document.getElementById('next-step2').addEventListener('click', function () {
+                currentStep++;
+                showStep(currentStep);
+            });
+
+            document.getElementById('prev-step3').addEventListener('click', function () {
+                currentStep--;
+                showStep(currentStep);
+            });
+
+            document.getElementById('next-step3').addEventListener('click', function () {
+                currentStep++;
+                showStep(currentStep);
+            });
+
+            document.getElementById('prev-step4').addEventListener('click', function () {
+                currentStep--;
+                showStep(currentStep);
+            });
+        });
+    </script>
+
+
+    <!-- Transition Section with Image Placeholder -->
+    <section id="transition" class="py-5 text-center bg-dark text-white">
+        <div class="container">
+            <h2 class="display-4">EMBRACE YOUR CURLS</h2>
+            <p class="lead">Every curl has its own story. Discover yours.</p>
+        </div>
+    </section>
+
+    <!-- Updated Information Section -->
+    <section id="information" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="display-5 text-center mb-5">CURL TYPES</h2>
+            <div class="row g-3">
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100 text-center position-relative overflow-hidden">
+                        <div class="card-img-top" style="background-image: url('images/wavy_processed.png'); background-size: cover; background-position: center; height: 300px;"></div>
+                        <div class="overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-light">
+                            <p class="overlay">Forms loose, “S”-shaped waves that range from fine to coarse. It tends to be frizz-prone and can lose definition easily.</p>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">WAVY</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100 text-center position-relative overflow-hidden">
+                        <div class="card-img-top" style="background-image: url('images/3b_processed.png'); background-size: cover; background-position: center; height: 300px;"></div>
+                        <div class="overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-light">
+                            <p class="overlay">Features well-defined, springy curls that form loops or ringlets. These curls are voluminous but can be prone to frizz and dryness.</p>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">CURLY</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100 text-center position-relative overflow-hidden">
+                        <div class="card-img-top" style="background-image: url('images/coily-nobg.png'); background-size: cover; background-position: center; height: 300px;"></div>
+                        <div class="overlay position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-light">
+                            <p class="overlay">Has tight, densely packed curls or zigzag patterns that are very fragile. This type often shrinks significantly when dry and requires lots of moisture.</p>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">COILY</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="center">
+                    <a href="curly-quiz-page1.html"><button class="btn btn-dark">Find Out Curl Type</button></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <style>
+    .card {
+    position: relative;
+    overflow: hidden;
+    }
+
+    .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Adjusted opacity for a darker overlay */
+    opacity: 0;
+    transition: opacity 0.3s ease; /* Ensure smooth transition */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+
+    .card:hover .overlay {
+    opacity: 0.9;
+    z-index: 1; /* Ensure it appears above other content */
+    }
+
+    .overlay p {
+    color: white; /* Ensure text is visible on the dark overlay */
+    }
+
+    </style>
+
+    
+    <!-- Blog Section -->
+    <!-- Blog Section -->
+    <section id="blog" class="py-5">
+        <div class="container">
+            <h2 class="display-4 text-center mb-5">BLOG</h2>
+            <div class="row">
+                <!-- Blog 1 -->
+                <div class="col-md-6 mb-4">
+                    <div class="card position-relative overflow-hidden">
+                        <div class="card-img-top" style="background-image: url('images/Styling.png');"></div>
+                        <div class="card-body">
+                            <h3 class="card-title">Say Goodbye to Frizz</h3>
+                            <p class="card-text">Explore techniques to keep your curls smooth and frizz-free, ensuring a polished look for every occasion.</p>
+                            <a href="#" class="btn btn-dark">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Blog 2 -->
+                <div class="col-md-6 mb-4">
+                    <div class="card position-relative overflow-hidden">
+                        <div class="card-img-top" style="background-image: url('images/Screenshot\ 2024-09-04\ at\ 12.58.34\ AM.png');"></div>
+                        <div class="card-body">
+                            <h3 class="card-title">Who Said Protective Styles have to be Boring?</h3>
+                            <p class="card-text">Discover different protective hairstyles that help maintain hair health while keeping your look chic and polished.</p>
+                            <a href="#" class="btn btn-dark">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!---------------------footer-------------------->
+    <!-- Footer -->
+    <footer class="footer">
+        <p>The Curl Guidebook Ⓒ</p>
+    </footer>
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // JavaScript for the multi-image rotation in the first carousel item
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Document is ready.');
+
+            const changingImages = document.querySelectorAll('.changing-images .changing-image');
+            let currentImageIndex = 0;
+
+            if (changingImages.length > 0) {
+                changingImages[currentImageIndex].classList.add('active'); // Ensure the first image is displayed initially
+                console.log('Initial image displayed.');
+            } else {
+                console.error('No images found for rotation.');
+                return;
+            }
+
+            setInterval(() => {
+                if (changingImages.length === 0) {
+                    console.error('No images available to rotate.');
+                    return;
+                }
+
+                // Hide current image
+                changingImages[currentImageIndex].classList.remove('active');
+                console.log(`Hiding image at index ${currentImageIndex}`);
+
+                // Update the index
+                currentImageIndex = (currentImageIndex + 1) % changingImages.length;
+
+                // Show next image
+                changingImages[currentImageIndex].classList.add('active');
+                console.log(`Displaying image at index ${currentImageIndex}`);
+            }, 2000); // Change every 2 seconds
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Curl Guidebook</title>
+
+    <!-- CSS and Fonts -->
+    <link rel="stylesheet" href="style.css"> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@100&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Play&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Arsenal:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+
+    <!-- Inline CSS for Adjustments -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            font-family: 'Arsenal', sans-serif;
+            overflow-x: hidden;
+            font-size: 20px;
+            text-align: center;
+            min-height: 100vh;
+        }
+
+        .text-transition{
+            font-family: 'Alegreya Sans SC', sans-serif;
+            background-color: darkslategray;
+            font-size: 45px;
+            margin-bottom: 5.5rem;
+            margin-top: 5.5rem;
+            text-align: center;
+        }
+
+
+        .navbar-brand {
+            padding-bottom: 20px;
+            font-family: 'Play', serif;
+            font-size: 10px;
+        }
+        .nav-link {
+            font-family: 'Alegreya Sans SC', sans-serif;
+            font-size: 20px;
+        }
+
+
+        .section-title {
+            font-family: 'Bona Nova SC', serif;
+            margin-top: 70px;
+            font-size: 40px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .product-card {
+            position: relative;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .product-img {
+            margin-top: 80px;
+            width: 100%;
+            height: 500px; 
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover .product-img {
+            filter: brightness(80%);
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+
+        .curl-id-card {
+            background-position: bottom right;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-image: url('images/id-bg-img.png');
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            color: rgb(0, 0, 0);
+            width: 420px;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin: 0 auto;
+        }
+
+        .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;}
+
+        .card-header h3 {
+        font-family: 'Bona Nova SC', serif;
+        font-size: 24px;
+        margin: 0;
+        }
+
+        .card-header .date {
+        font-family: 'Alegreya Sans SC', sans-serif;
+        font-size: 14px;
+        margin-right: 10px;
+        }
+
+        .card-details p {
+        font-family: 'Arsenal', sans-serif;
+        font-size: 18px;
+        margin: 5px 0;
+        }
+
+        .card-details strong {
+        font-weight: bold;
+        }
+
+        .card-footer {
+        text-align: center;
+        margin-top: 10px;
+        }
+
+        .card-footer .certification {
+        font-family: 'Shadows Into Light', sans-serif;
+        font-size: 17px;
+        text-transform: uppercase;
+        }
+        
+        .disclaimer-section {
+            background-color: #f2f2f2;
+            padding: 40px;
+            width: 100%;
+            margin-top: 40px;
+            border-top: 1px solid #ddd;
+        }
+
+        .disclaimer-section p {
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        
+        .button-container {
+
+            margin: 10px auto; /* Adjust top and bottom margins if needed */
+            position: relative;
+        }
+
+        .button.button4 { /* Target the "Previous" button */
+            margin-left: 40px; /* Move the button 20px to the left */
+        }
+
+        .button {
+            margin-top: 30px;
+            margin-bottom: 70px;
+            padding: 10px 20px;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 150px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #333; /* Darker shade on hover */
+            color: white;
+        }
+
+
+
+        .footer {
+            background-color: black;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 1rem;
+            width: 100%;
+            position: absolute;
+            left: 0;
+        }
+
+
+    </style>
+</head>
+    <body onload="myFunction()">
+        <section id="nav-bar">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white">
+                <div class="container-fluid">
+                    <!-- Header Text -->
+                    <a class="navbar-brand">The Curl Guidebook</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.html">RETURN TO HOME PAGE</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="about.html">ABOUT</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </section>
+        <div class="container">
+            <h2 class="section-title">Here is your Curl ID and some product recommendations</h2>
+
+            <div class="curl-id-card">
+                <div class="card-header">
+                  <h3>Name: Iconic Curls</h3>
+                  <p class="date" id="date"></p>
+                </div>
+                
+                <div class="card-details">
+                  <p><strong>Curl Type:</strong> <span id="curlType"></span></p>
+                  <p><strong>Hair Density:</strong> <span id="hairDensity"></span></p>
+                  <p><strong>Hair porosity:</strong> <span id="hairporosity"></span></p>
+                  <p><strong>Texture:</strong> <span id="hairTexture"></span></p>
+                </div>
+              
+                <div class="card-footer">
+                  <p class="certification">The Curl Guidance Issued</p>
+                </div>
+              </div>
+             
+            <h1 class="section-title">Product Recommendations</h2>
+                <!-- Transition Section with Image Placeholder -->
+            <section id="transition" class="py-5 text-center bg-dark text-white">
+                <div class="container">
+                    <h2 class="display-4">Curly hair isn't one-size-fits-all</h2>
+                    <h3 class="display-9">and neither are these shampoo recommendations</h3>
+                </div>
+            </section>  
+            <div class="row">
+                <!-- Shampoo 1 -->
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <img id="shampoo1" class="img-fluid product-img" alt="Shampoo 1">
+                        <a href="#" id="shampooLink1" class="button button4">View Product</a>
+                    </div>
+                </div>
+                <!-- Shampoo 2 -->
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <img id="shampoo2" class="img-fluid product-img" alt="Shampoo 2">
+                        <a href="#" id="shampooLink2" class="button button4">View Product</a>
+                    </div>
+                </div>
+                <!-- Shampoo 3 -->
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <img id="shampoo3" class="img-fluid product-img" alt="Shampoo 3">
+                        <a href="#" id="shampooLink3" class="button button4">View Product</a>
+                    </div>
+                </div>
+            </div>
+            <section id="transition" class="py-5 text-center bg-dark text-white">
+                <div class="container">
+                    <h2 class="display-4">Unique curls deserve unique care</h2>
+                    <h3 class="display-9">check out these conditioners picked for you</h3>
+                </div>
+            </section>
+            <div class="row mt-4">
+                <!-- Conditioner 1 -->
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <img id="conditioner1" class="img-fluid product-img" alt="Conditioner 1">
+                        <a href="#" id="conditionerLink1" class="button button4">View Product</a>
+                    </div>
+                </div>
+                <!-- Conditioner 2 -->
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <img id="conditioner2" class="img-fluid product-img" alt="Conditioner 2">
+                        <a href="#" id="conditionerLink2" class="button button4">View Product</a>
+                    </div>
+                </div>
+                <!-- Conditioner 3 -->
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <img id="conditioner3" class="img-fluid product-img" alt="Conditioner 3">
+                        <a href="#" id="conditionerLink3" class="button button4">View Product</a>
+                    </div>
+                </div>
+            </div>
+            <section id="transition" class="py-5 text-center bg-dark text-white">
+                <div class="container">
+                    <h2 class="display-4">Keep those curls happy between washes</h2>
+                    <h3 class="display-9">check out these these custom-picked leave-in conditioners</h3>
+                </div>
+            </section>
+            <div class="row mt-4">
+                <!-- Leave-in Conditioner 1 -->
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <img id="leaveIn1" class="img-fluid product-img" alt="Leave-in Conditioner 1">
+                        <a href="#" id="leaveInLink1" class="button button4">View Product</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <img id="leaveIn2" class="img-fluid product-img" alt="Leave-in Conditioner 2">
+                        <a href="#" id="leaveInLink2" class="button button4">View Product</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <img id="leaveIn3" class="img-fluid product-img" alt="Leave-in Conditioner 3">
+                        <a href="#" id="leaveInLink3" class="button button4">View Product</a>
+                    </div>
+                </div>
+            </div>
+            <section id="transition" class="py-5 text-center bg-dark text-white">
+                <div class="container">
+                    <h2 class="display-4">Your curl type + your style goals = our personalized styling product picks</h2>
+                </div>
+            </section>
+            <div class="row mt-4">
+                <!-- Styler 1 -->
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <img id="styler1" class="img-fluid product-img" alt="Styler 1">
+                        <a href="#" id="stylerLink1" class="button button4">View Product</a>
+                    </div>
+                </div>
+                <!-- Styler 2 -->
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <img id="styler2" class="img-fluid product-img" alt="Styler 2">
+                        <a href="#" id="stylerLink2" class="button button4">View Product</a>
+                    </div>
+                </div>
+                <!-- Styler 3 -->
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <img id="styler3" class="img-fluid product-img" alt="Styler 3">
+                        <a href="#" id="stylerLink3" class="button button4">View Product</a>
+                    </div>
+                </div>
+
+        </div>    
+        <script>
+        
+
+        const hairtype = localStorage.getItem("checkedvalue1")
+        var porosity = localStorage.getItem("checkedvalue2")
+        var density = localStorage.getItem("checkedvalue3")
+        var highlight = localStorage.getItem("checkedvalue4")
+        var hairTexture = localStorage.getItem("checkedvalue5")
+        var look = localStorage.getItem("checkedvalue6")
+        var need = localStorage.getItem("checkedvalue7")
+        
+        function myFunction() {
+                var today = new Date();
+                var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+                var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                var dateTime = date+' '+time;
+                document.getElementById("date").innerHTML = dateTime;
+                document.getElementById("curlType").innerHTML = hairtype;
+                document.getElementById("hairDensity").innerHTML = density;
+                document.getElementById("hairporosity").innerHTML = porosity;
+                document.getElementById("hairTexture").innerHTML = hairTexture;
+        }
+
+        const imagePaths = {
+            "shampoo": {
+                "2a": ["images/2a-shampoo3.png", "images/2a-shampoo2.png", "images/2a-shampoo.png"],
+                "2b": ["images/2b-shampoo3.png", "images/2b-shampoo2.png", "images/2b-shampoo.png"],
+                "2c": ["images/2c-shampoo3.png", "images/2c-shampoo2.png", "images/2c-shampoo.png"],
+                "3a": ["images/3a-shampoo3.png", "images/3a-shampoo2.png", "images/3a-shampoo.png"],
+                "3b": ["images/3b-shampoo3.png", "images/3b-shampoo2.png", "images/3b-shampoo.png"],
+                "3c": ["images/3c-shampoo3.png", "images/3c-shampoo2.png", "images/3c-shampoo.png"],
+                "4a": ["images/4a-shampoo3.png", "images/4a-shampoo2.png", "images/4a-shampoo.png"],
+                "4b": ["images/4b-shampoo3.png", "images/4b-shampoo2.png", "images/4b-shampoo.png"],
+                "4c": ["images/4c-shampoo3.png", "images/4c-shampoo2.png", "images/4c-shampoo.png"]
+            },
+            "conditioner": {
+                "2a": ["images/2a-conditioner3.png", "images/2a-conditioner2.png", "images/2a-conditioner.png"],
+                "2b": ["images/2b-conditioner3.png", "images/2b-conditioner2.png", "images/2b-conditioner.png"],
+                "2c": ["images/2c-conditioner3.png", "images/2c-conditioner2.png", "images/2c-conditioner.png"],
+                "3a": ["images/3a-conditioner3.png", "images/3a-conditioner2.png", "images/3a-conditioner.png"],
+                "3b": ["images/3b-conditioner3.png", "images/3b-conditioner2.png", "images/3b-conditioner.png"],
+                "3c": ["images/3c-conditioner3.png", "images/3c-conditioner2.png", "images/3c-conditioner.png"],
+                "4a": ["images/4a-conditioner3.png", "images/4a-conditioner2.png", "images/4a-conditioner.png"],
+                "4b": ["images/4b-conditioner3.png", "images/4b-conditioner2.png", "images/4b-conditioner.png"],
+                "4c": ["images/4c-conditioner3.png", "images/4c-conditioner2.png", "images/4c-conditioner.png"]
+                
+            },
+            "leaveIn": {
+                "2a": {
+                    "Low porosity": ["images/2a-low-leave-in.png", "images/2a-low-leave-in2.png", "images/2a-low-leave-in3.png"],
+                    "Normal porosity": ["images/2a-norm-leave-in.png", "images/2a-norm-leave-in2.png", "images/2a-norm-leave-in3.png"],
+                    "High porosity": ["images/2a-high-leave-in.png", "images/2a-high-leave-in2.png", "images/2a-high-leave-in3.png"]
+                },
+                "2b": {
+                    "Low porosity": ["images/2b-low-leave-in.png", "images/2b-low-leave-in2.png", "images/2b-low-leave-in3.png"],
+                    "Normal porosity": ["images/2b-norm-leave-in.png", "images/2b-norm-leave-in2.png", "images/2b-norm-leave-in3.png"],
+                    "High porosity": ["images/2b-high-leave-in.png", "images/2b-high-leave-in2.png", "images/2b-high-leave-in3.png"]
+                },
+                "2c": {
+                    "Low porosity": ["images/2c-low-leave-in.png", "images/2c-low-leave-in2.png", "images/2c-low-leave-in3.png"],
+                    "Normal porosity":["images/2c-norm-leave-in.png", "images/2c-norm-leave-in2.png", "images/2c-norm-leave-in3.png"],
+                    "High porosity": ["images/2c-high-leave-in.png", "images/2c-high-leave-in2.png", "images/2c-high-leave-in3.png"]
+                },
+                "3a": {
+                    "Low porosity": ["images/3a-low-leave-in.png", "images/3a-low-leave-in2.png", "images/3a-low-leave-in3.png"],
+                    "Normal porosity": ["images/3a-norm-leave-in.png", "images/3a-norm-leave-in2.png", "images/3a-norm-leave-in3.png"],
+                    "High porosity": ["images/3a-high-leave-in.png", "images/3a-high-leave-in2.png", "images/3a-high-leave-in3.png"]
+                },
+                "3b": {
+                    "Low porosity": ["images/3b-low-leave-in.png", "images/3b-low-leave-in2.png", "images/3b-low-leave-in3.png"],
+                    "Normal porosity": ["images/3b-norm-leave-in.png", "images/3b-norm-leave-in2.png", "images/3b-norm-leave-in3.png"],
+                    "High porosity": ["images/3b-high-leave-in.png", "images/3b-high-leave-in2.png", "images/3b-high-leave-in3.png"]
+                },
+                "3c": {
+                    "Low porosity": ["images/3c-low-leave-in.png", "images/3c-low-leave-in2.png", "images/3c-low-leave-in3.png"],
+                    "Normal porosity": ["images/3c-norm-leave-in.png", "images/3c-norm-leave-in2.png", "images/3c-norm-leave-in3.png"],
+                    "High porosity": ["images/3c-high-leave-in.png", "images/3c-high-leave-in2.png", "images/3c-high-leave-in3.png"]
+                },
+                "4a": {
+                    "Low porosity": ["images/4a-low-leave-in.png", "images/4a-low-leave-in2.png", "images/4a-low-leave-in3.png"],
+                    "Normal porosity": ["images/4a-norm-leave-in.png", "images/4a-norm-leave-in2.png", "images/4a-norm-leave-in3.png"],
+                    "High porosity": ["images/4a-high-leave-in.png", "images/4a-high-leave-in2.png", "images/4a-high-leave-in3.png"]
+                },
+                "4b": {
+                    "Low porosity": ["images/4b-low-leave-in.png", "images/4b-low-leave-in2.png", "images/4b-low-leave-in3.png"],
+                    "Normal porosity": ["images/4b-norm-leave-in.png", "images/4b-norm-leave-in2.png", "images/4b-norm-leave-in3.png"],
+                    "High porosity": ["images/4b-high-leave-in.png", "images/4b-high-leave-in2.png", "images/4b-high-leave-in3.png"]
+                },
+                "4c": {
+                    "Low porosity": ["images/4c-low-leave-in.png", "images/4c-low-leave-in2.png", "images/4c-low-leave-in3.png"],
+                    "Normal porosity": ["images/4c-norm-leave-in.png", "images/4c-norm-leave-in2.png", "images/4c-norm-leave-in3.png"],
+                    "High porosity": ["images/4c-high-leave-in.png", "images/4c-high-leave-in2.png", "images/4c-high-leave-in3.png"]
+                }
+            },
+            "styler": {
+                "soft": ["images/soft-styler.png", "images/soft-styler2.png", "images/soft-styler3.png"],
+                "volume": ["images/volume-styler.png", "images/volume-styler2.png", "images/volume-styler3.png"],
+                "light": ["images/light-styler.png", "images/light-styler2.png", "images/light-styler3.png"],
+                "medium": ["images/medium-styler.png", "images/medium-styler2.png", "images/medium-styler3.png"],
+                "strong": ["images/strong-styler.png", "images/strong-styler2.png", "images/strong-styler3.png"]
+            }
+        }
+
+        const productLinks={
+            "shampoo": {
+                "2a": ["https://www.amazon.com/Ouidad-8-5-Shampoo-for-Unisex/dp/B081QLBTLS/ref=sr_1_1?crid=24XYASDSPLOXQ&dib=eyJ2IjoiMSJ9.Mz_4dqtn1tFx8dvpuSXemA0erWiAsU8Rd5yYEUhiurtsWkVrN78B0O7j5mYkm-ve5od0Zc9wXWCBjzFcxaUetVVck9FuIZl9Rkhfsd9zzLbuLHq32MAoUW1u6VPDdXrdmb26pSZMPXe9cFQDXOOS-nRp1tIgwjk0ojNUF28UNgtEcX13q7N2ki2QtiHl4fUQdg5eosCmRX3BKkFkNd8qjNsswARYctJQpr8XKIFdJei6irGJa6pJiMYerUKOwNS2bwzur680v1juwi_oExLriHlt_Rv0iKR7emdRW7PgDwk.K9OB78kIKxa4pu-oWBkN3Vd9HqfJ5HKki9H99WW6J4I&dib_tag=se&keywords=ouidad+vita+lcurl+shampoo&qid=1725806016&sprefix=ouidad+vita+%2Caps%2C147&sr=8-1", 
+                        "https://www.amazon.com/Living-Proof-Perfect-hair-Shampoo/dp/B09RX33YDW/ref=sr_1_1_sspa?dib=eyJ2IjoiMSJ9.egfM-1UImJlzBOoOlQhaKubh6r12Gpf7qrhopHehpUKw2584ZDoHqLLUE4cmAMdvcTVYL6MBhEZRwrGYSNdZdgPCCiX4Nt7UwOGA_oCe0eIMeYLvNvVBXAsSBSIAbd3-XOzLBiSkjILys-zXRY-aRJovK2tCC2p_blSskhg5UUKaPpfvwxRMiIY2rpY3LN319goRAb_3f8Zw21IgWdwpdFl0m1tRiJHEK1kk7IIECwgJSNoGfG_5YEVASea_0JFpJyLsvGaQJVoI8y_KP1_YYE2KSeR6EF78UeyQaCEOjPo.S4N_yzrwm7HYjw5JgLvQldWnA-G4IvHeALPYvT6GjCE&dib_tag=se&hvadid=580916581396&hvdev=c&hvlocphy=1014327&hvnetw=g&hvqmt=e&hvrand=7279178146202909471&hvtargid=kwd-58543186495&hydadcr=23889_13545126&keywords=living+proof+perfect+hair+day&qid=1725805973&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1", 
+                        "https://www.amazon.com/dp/B0048F5ATO?tag=price20923-20&ascsubtag=wtbs_66ddb53b9f11f7aabb231419"],
+                "2b": ["https://www.amazon.com/Briogeo-Charisma-Hydrating-Moisturize-Paraben-Free/dp/B06Y4HDBWC/ref=sr_1_5?crid=10UUYZL7VWK3J&dib=eyJ2IjoiMSJ9.2YjVncEnxg0ifcV56xWtpmajHRkcVXRYyPn7RYRRUQL6xSmc4hU3cnV2J76Bt-r5TMSuOfN_f8yBAvXZ0cB5xGhKVlyF-I4BTmBzcmTSa1VsiQBz0Usf2MSDbRu65pHkCIrH6K1mVahP-oqW19-p6AAWTL_oKHbmwe2WMUXr0xeHpXbSQ49gcnkN447KNs--L9bjqKp1BOs5lBWXYqRNwuYhOraqpq9-CrDHrpalLrQ-i4ymCU2HaV8Pmh9uEtkHZkamH8EtsDOi7AamltczUbICnJLoePOiMzB4jtqyjeg.urFE0KGLFCL_WZYQdmkShS4yqbfpRI3PX97nOq2qqCM&dib_tag=se&keywords=briogeo+curl+charisma+shampoo&qid=1725806099&sprefix=briogio+curl+charisma+shampoo%2Caps%2C156&sr=8-5",
+                        "https://www.amazon.com/Maui-Moisture-Quench-Coconut-Shampoo/dp/B01N0103LP/ref=sr_1_2?crid=LWDVC5U16MX9&dib=eyJ2IjoiMSJ9.ZVk5ETy0ZUqpjro35qWEEcMsilR0hm78F5aBZI-AaO-zMBZ9ehRokIMHh3CPQ9fqetJNCu7x1tbx7rPt9dTvr2MxWAFKK2ECDfKuLYdoU-cUEEZspYv7nc5MKH1UBQGYFtNF7JcrR2e4HbNFVINr7rk1jBD-_B8T8i1pGJr8SoSZu8qNJU9z2J1LfxeCJ2rhnLEzPRx2Yy_JwMh5w6L2BHxnNwylAFN2c3fUkfPsFQxlvkvekidunKUpFbCs9bPdUIs_QmPmWqGIIh3XKdixhVop-t90_bX2_ejWEB_dHQs.R9dXXiV-K48VErFsWkVycvGll8gBgYFoJ8AkXVpzYUg&dib_tag=se&keywords=maui+curl+quench&qid=1725806155&sprefix=maui+curl+%2Caps%2C143&sr=8-2",
+                        "https://www.amazon.com/Suave-Coconut-Shampoo-Damaged-Infusion/dp/B0CNKZJXP5/ref=sr_1_6?crid=19Y1YNPARERQT&dib=eyJ2IjoiMSJ9.9LAQe-q_QpChNrrz9sxzYnK4Oiqp2gEcTAPlaa3lfL03TNGOcwSnpW7zrHR9SxIS7vNs3yUjIwUl0daTaEJShuwZAZsiXXSobzQksIqYEN4W9lM-GBtU_MyyRlQlpkqfxkntFDS9i48IM00O-DIFrQiP-XsQF9C58f8iTUXZ4UVEVgPQnCuYZ61x4A8iGaUUYcuk_nCmtGtRx5fURqAcJ1tupotVxECflrXwa19hIo522CmjBVpOQe_DTQeNMDzhyRCd-MxNOmhavprQ-D3OQJakqqpSPEXhmw-TGWO9Jm8.LawJQ93xDfL-qYJkSp2-A9XUH-6zcmdFnLeiNvQLALE&dib_tag=se&keywords=suave+coconut+shampoo&qid=1725806194&rdc=1&sprefix=suave+co%2Caps%2C151&sr=8-6"],
+                "2c": ["https://www.amazon.com/ORIBE-Signature-Shampoo-8-5-Fl/dp/B07XGTMQLF/ref=sr_1_5?crid=ZLDBYCFEY1BZ&dib=eyJ2IjoiMSJ9.-ILdT-WfVwzS0-FlBdsWkIL3dQwkSZPMK_dMJq4H-RHjsiZOsUq1BvZVch_Z6EbBS8k04niaoLxXJOhXh_V-K89lk8cwhJGhtbj_h1O6XZeDPkRcrmyWTmnJlJmVzx6YYlGM77aoIXZBsG1bPCARR-7oyibhmwIpwKY7O3L4UHN6jKx4ap5QDGsnD1PilQnzGcpMH9nEA_WOKm9HLN-WyGbiByXhYeeVeE_HGk7iZXkKQYMPQVBD4iqk4MFKcyQfNJIqYV_PK9Y0gD5xHToz8PAtIHSy7yKpL_zKgeD9yoE.CxqxSzR7cqq0kQ7bFoRuMNDHki4mkQxTHwI-2C34zcc&dib_tag=se&keywords=oribe+shampoo&qid=1725806438&sprefix=oribe+shampoo%2Caps%2C144&sr=8-5",
+                        "https://www.amazon.com/Bumble-Curl-Moisturizing-Shampoo-8-5oz/dp/B08FDK2TW1/ref=sr_1_4?crid=15GXZN87954GE&dib=eyJ2IjoiMSJ9.mee1ysVAGTAXm1UCKHl4_ntP8xanJMU3v3oiKtuodI5IuyEzs6E17-sbkemtOtOQ0t0K1ZDBchrwbXrZL8XqxIOnHfYaVrDv4dZqYwnT15kF5WVgzcTAsbkdHWHBapF0_bGG3m6KVIdxusbBya5Ez0OVtmY06RRuuWIQxC4rp_SHpIwlsRLlYUb-H3gQrqdfRp4e78_1ir5Ar38yWGUgp13giNX_Wom0DYzM1mDCJoud65NP7MnF6PfHMNjY19nvMFN4_My7RLvLc2C7fXg8LtZvhXrs8B9EirqkTOErDYs.zJXmIMq7L2hjcXP3mU6uNJPHoopz2ig5ZY-BFXeN8us&dib_tag=se&keywords=bb+curl+shampoo&qid=1725806415&sprefix=bb+curl+shampoo%2Caps%2C157&sr=8-4",
+                        "https://www.amazon.com/Jojoba-Oil-Lavender-Curls-Shampoo/dp/B09QH25F6K/ref=sr_1_40?crid=1MLP32E4U4RZF&dib=eyJ2IjoiMSJ9.LtuJcFOmFNRGfTvoJtX4Soi0I_SWz92PgPkZavmWDflSuY4fV8PL_czYalKXqrPX-PVf39zNfS_UcKh2C1ORI2Pxp_vBGJ9CDfn5cYiLagg7_BjyiTvY6GO3cJzXWlPUAiNaIY6hqrFFMBkxXbaVGPARtQWr7in3oIQw3tmNGsppHxBNdZMSjLYjgdZpozou87RSpvmR0GL3PwytntxUdPFd16GTo3TKP9fHTybRLtjB6Dfz_Arl68saOYYrq5r05YoV-NaSTncwCuMlmcbTLFnznYHmFcbO8p1-FGEmNCU.wj5s8UrUOfxHjhmQagCku3fGHIbsVdHEtf3qXIp_Yg4&dib_tag=se&keywords=herbal+essences+shampoo+lavender&qid=1725806488&sprefix=herbal+essences+shampoo+lavender%2Caps%2C150&sr=8-40"],
+                "3a": ["https://www.amazon.com/ORIBE-Shampoo-Moisture-Control-8-5/dp/B07MFFDK7Z/ref=sr_1_1?crid=PE5T4J7V79LC&dib=eyJ2IjoiMSJ9.eZV-ezDRGK6YlJ_NIIeUIMBiVXP1Ltu2uboHXKzzlzgIYku6B8gYp5RGH79kbUGJdNFOSE75ud4jRSFllBRhlJd7420U4pT2xgPuTo1CebrhwrCsGSGcLT23PfOFAuvmH9BtXeA8mWN6kHqDFDHGSDSnw1u9wtHYEB4rGQ61M5qAdfxQ86uKA6CEILSoRPuqulHRmu-7ABqQD6D0AMc-Aj__eGiQnlIhcnHI0rJlhuAsJorJKzrVvsbHN1RlOb9NC2uegedn4T5bdwEWhPPWQXlb6G_3x-eIsxrSJ3oRTaI.LjzpoUM_j0N00I6MPDUUf_EGgk2m9bT6aSvBreF8BAc&dib_tag=se&keywords=oribe+shampoo+moisture&qid=1725806598&sprefix=oribe+shampoo+mo%2Caps%2C162&sr=8-1",
+                        "https://www.amazon.com/REDKEN-Shampoo-Extremely-Nourishes-Severely/dp/B0BRNW3XDJ/ref=sr_1_5?crid=MIG9HUQJ3F29&dib=eyJ2IjoiMSJ9.CxkFjFjN7Qpk6uybeSv8DREsnu1K-n2qvU81VTW7r27wPduCZLYswlp5i4zQX0OVWP2VAbVA4T3UOrm5iwyTZ0Mg_x0x1JqZtBIXETep3Exp6RfRcmkYjpQoK_iL8D0RSubHy-A4Nfb-0I5a2S4G-h38JX6-GhoL1kqo1Z6Icse6R_BKr49IV8LkP7nTbJsYPVk4OzuKfFKTBEW0KAIH2HCG_0q3JxNere4wNVV-V91GRToKc_lEcC6u6vTpwxTCPi7vZIpXhZ0ssbM9A9YVN0yowX9Nj3J_LMqJbAhMQ3o.9kmioBQgknWJxbT-zJI7Xl0y26aeyi79LHdB0veVmRs&dib_tag=se&keywords=redken+curls+shampoo&qid=1725806639&sprefix=redken+curls+shampoo%2Caps%2C145&sr=8-5",
+                        "https://www.amazon.com/TRESemmé-Shampoo-Flawless-Curls-28/dp/B00UB6OQ4O/ref=sr_1_7_f3_0o_fs?crid=3EBSLUHG93YXA&dib=eyJ2IjoiMSJ9.bVzZNCX4_uuzbQElMCP9f0huklmWeT5Ke7jAni1M3XE86VABc6KqYrvIOqAnahSvV1a4TE5A_q_zo9TsrL_k4c4muV5v2_fNJQvosNB8ngkdg4tYBNK2DyHvDU82ks8IVgf_PTMt38cpSLsNrQWpoDh8aw9z7Z7_rv83OzykmcVmMFCTSL_JRa2wGwT7ZJ4m0Dt5PsWx_GLzF3gk31YT1mbjIpi0nN6zgfkBtLqiIEhiRGuN52n4EMb9IR9attODilPU2jH22I1uNNQexSWWt10vXGB5FIt-Cl8NkyuEKV8.4K3kBFalDWvkJtJB8I58sc2JdB6-ZKYBOpCt30jo-kw&dib_tag=se&keywords=tresemme+flawless+curls+shampoo&qid=1725806675&sprefix=tres+emme+fla%2Caps%2C142&sr=8-7"],
+                "3b": ["https://www.amazon.com/Kerastase-Manifesto-Hydratation-Douceur-250ml/dp/B094R6X5QW/ref=sr_1_4?crid=VJR6C0PZXXY1&dib=eyJ2IjoiMSJ9.DCLbyOXW47R1lUVApLDsl979qZ_HiovL9FgsueZJF91SnqMNDF4tqUNaLTfxkQ4DxuVMfDvHdA5DBxuSpxX4O7xlyg0_rCLvm1RqdSJd1w7RRpsxfH7y6-3UzyKfvABhChumNtna8kod7lirLYEZ6RRDDUeannMlH_aoTDchnTaL6_lF7RIl5JgzLpYq1IwtUR-qdT9EA0piO_6_6iBIUFd28ay29ivtrT6BsduViri3--NC5pi_e_-0KWZ1lhAzuzHWUCVkk8uuB8nU4UXG1wF0cKZMYZFUp1NvMbdQo24.ZQzAZ9NORzpvY-q9dRtptCj9psEnOH9mrT0lUAwv2mA&dib_tag=se&keywords=kerastase+curl+manifesto&qid=1725807034&s=beauty&sprefix=kerastase+curl+%2Cbeauty%2C148&sr=1-4",
+                        "https://www.amazon.com/Advanced-Climate-Control-Defrizzing-Shampoo/dp/B073RRTZ66/ref=sr_1_3?crid=HUFF6KT352DM&dib=eyJ2IjoiMSJ9.P8_iwr5sZMZYq3nSB_nqPO6FTSGr3S80ZZo_SjyaaJ-9jLjuzkHrVPHTw_Or3hgrroN-qypnSJ20TfU-IxT636iKiLm660RpCPXLO7RXI2VxYhZlLWKDgFQWLfuH2vKusgO_6BFspiLmOfa0uSDYaWZYpbVh1Q3CpP5zw0eJDJoDxSIl-KQwD5x4PsuSX_xsB6B1dRkXr-hBO1oJyb_wE5F5tO3PDuaB1d-_79zSM6i2DZCzBCJ-NDBj6xDB4xyTo9VlwJEODUxyJwqjniIjv5HuJopdZaxM_VtJBaujgnM.qSIfYVWXY39hs7NIcag2hDiRH2PFnfQfzBfKMPZIIug&dib_tag=se&keywords=ouidad+defrizzing+conditioner&qid=1725806946&s=beauty&sprefix=ouidad+def%2Cbeauty%2C149&sr=1-3",
+                        "https://www.amazon.com/Garnier-Sulfate-Free-Silicone-Free-Frizz-Resistant-Packaging/dp/B01MDTVV6T/ref=sr_1_1?crid=1OGGA2EO2NO40&dib=eyJ2IjoiMSJ9.gvjxmZ9Dg8mGwiz6ANV6SFExPWAJE95-9Y0SfbNbATBkfrypC6SaHyKG9PxzE8IHNNFmBgro87tuo4kqEUTxgPN2D2sJykLo34XhYHS5-K9EH5qs7UMCFsaSR5D79I_ry15rjqQ64c8urQE9PBxkBOA-Vb3l2eMvWUjFRJd47oFrWDiJpoTErBRfSdOrx2x-UfEAIdKEDG9kbzdplR_MRc7zTEUbQ_RrJrLYUeWElLoJUyTfvFM4pDTzxaycj0fVv3-Xoy7Ck4OSBizVMLDu7RioRPsB6G6ySuu3_ugucFc.N-_BwwVYZpARfJ7JFG7fRj2ydpFRvCCkEcOF8p30U94&dib_tag=se&keywords=garnier+curl+shampoo&qid=1725806815&rdc=1&s=beauty&sprefix=garnier+curl+shampoo%2Cbeauty%2C137&sr=1-1"],
+                "3c": ["https://www.amazon.com/sspa/click?ie=UTF8&spc=MTozNTYxNjM0NTcwNTQ5Njg4OjE3MjU4MDcwOTk6c3BfYXRmOjMwMDA1NzgwOTYxNTYwMjo6MDo6&url=%2FPATTERN-Beauty-Tracee-Cleansing-Shampoo%2Fdp%2FB0CBQQNBPR%2Fref%3Dsr_1_3_sspa%3Fcrid%3D29UKEWMRRAIM1%26dib%3DeyJ2IjoiMSJ9.h2ubQc__nQl4afb5BoXmWntKTxFFvfZjJw-FVGjIbC_vkq6s8CkvbgI1CNB4hEZSx01ukuRaRqN3v2Avztl9EYQ-yCaLnd7kUtlQZumvutjXdDJcpn_ifZEEDXvh-vMGIZvQw8JwDHfaiB1tmOOD71Qn0oD7LmRWJbRF_KXqt5gne-yyPSOSFVARbAKjx3_3Fri4APFUTvVwSDm-Uat5pPF8JDl9wfRZfdvfLtAvooeNePOqDuil2NTeObjC3G_vkryxLcfFMa3EnzZ_-dI60Gu2Ug0RtI5rdw3_lOlymjY.yHmvV-0x9Nv5fg6mP9vJxP5j7yTvPBJgtdbBjVd0LPw%26dib_tag%3Dse%26keywords%3Dpattern%2Bshampoo%26qid%3D1725807099%26s%3Dbeauty%26sprefix%3Dpattern%2Bshampoo%252Cbeauty%252C149%26sr%3D1-3-spons%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9hdGY%26psc%3D1",
+                        "https://www.amazon.com/Shea-Moisture-Jamaican-Shampoo-Strengthen/dp/B01LFQYXBO/ref=sr_1_7_mod_primary_new?dib=eyJ2IjoiMSJ9.2_4BdwdxXfBlGsio1lDUNyckYGtaeFMGZ2yaXlGJUMm31mhj8RtM0DKWirreSgCx0McBvgX62JTgn1hbcwrTYCkROQzs5P5vFynSs_H-RMW4hrtOZ4HNvPdXGGqr5bNCz-1H0sOKtoPVhReBBPeztAicUoHdSYDgZ6jnsa8MG4cJ9EP3G7-0R_ErBExpwY105YGyF13PU3dnk-Z7NFk_w_dhEeGMm7ii4lFzdiH91o7i_ylGc2y6bWpSktefP_-92Zo-nyXN2visS3tr7kt-5j8RVG_v6OY1L2UX73ylVXA.reep8f7zRFyhuKMK5zkBk5ogEf1VDIh0PspxXJmW8vI&dib_tag=se&keywords=shea+moisture+castor+oil&qid=1725807250&rdc=1&s=beauty&sbo=RZvfv%2F%2FHxDF%2BO5021pAnSA%3D%3D&sr=1-7",
+                        "https://www.amazon.com/African-Pride-Moisture-Miracle-Coconut/dp/B081P11L1C/ref=sr_1_44?crid=21D9MRFMKZ0GH&dib=eyJ2IjoiMSJ9.eh--cZFzEgNjl9lug74iILklxiD_GLECF4oT2KWOCmOJVKJyzcBpW8DmQ9iaMDUDRPrETr611ctexx_LcZNxsQeXfV6asW3R2WrZ_KoWLx0uQVqo9OdOSnxKLKQzRJfPpanqye2qIMKNvM89ZaOz5HUOaBjn559Xlah7MSMS7VIrS3HwHk_lmVY4H-Y1si2AL23J9swswInMFr4ZNwRhKSr-M8gHlsA2BiKnkEdqxxJPxIiB0yGfaXSmEfKo_DY2i20G2jPRspF2umI9JgK1ZNF6yVuczN_kcn-CgvgnXXQ.NNKPOyBmIcE4pvVYDVgSS1Un7Ux9U2sJbDD5l4baGVY&dib_tag=se&keywords=african+pride+shampoo&qid=1725807364&s=beauty&sprefix=african+pride+shampoo%2Cbeauty%2C133&sr=1-44"],
+                "4a": ["https://www.amazon.com/Nutritive-Bain-Satin-Replenishes-Plant-Based/dp/B0BZZJYKZ6/ref=sr_1_5?crid=1YJHDP8OAH49T&dib=eyJ2IjoiMSJ9.gMkUNyTWq9F-q1qn8b0Xk3qc2PG2MXHlMXnCmQBNMiWboStI7HDOCj4im7fazPIxGLJWI092E_OUiv9xoBaQn3Iqo1VfwbX0SC-B-QZB3gY4sVdNXMd9WKauGG3xCO1xK85SiK3VL_BOHKufjAYufw749GL9xK9v2DFBXyzDLmErLbQ7Y9hug4_9TW0vPCEFDGF_ZQt82FPpSc_QxGkNv9AFiEstGc_JZTKvDze2Y4XLjiLqZmC6wpmZ9P7cfl65habngJGOiYj9LsWeTX_FVXajMhQlVDPGuJNtafB6x6Q.MGpRRG6MF_bwtYGxc7_QhTUX5As15fOdTWJwAPJKhjE&dib_tag=se&keywords=kerastase+bain+shampoo&qid=1725807518&s=beauty&sprefix=kerastase+bain+shampoo%2Cbeauty%2C151&sr=1-5",
+                        "https://www.amazon.com/tgin-Moisture-Sulfate-Shampoo-Natural/dp/B00FLI0MTK/ref=sr_1_5?crid=1UFOY8WKGK8E0&dib=eyJ2IjoiMSJ9.81T4V3sGxfcc19m7d5KWKBCS_Fv7Nevs0edUL8UfwOyW7Fs_VJpDQax4mpXFbs95cFKVTD5uYgzTtMhaGQHaiUNZrj7THICzA0eXh6ykFZXsuYcc5oQ8lmhtb7mIH4s9GNv9J_0NZ3B1KK84v0tzvMEjqaRqIYE7yivFqJEyHKRHFMFL7aK8mR9ce-nSrlCWQbhpkZ5To699myKQWf7mQt7ecmluZxYjKuVvtaMFAIjD2UJ1YTKsf-V11kuFUEnuO_IENBafmc6dVSPfAwx111efwjYg7ZmqnOx1e4-00IU.yp50XMBg1393UeXZGkxVXmkgx9UrS2LHUikT7sLaxW0&dib_tag=se&keywords=tgin+moisture+rich+shampoo&qid=1725807622&s=beauty&sprefix=tgin+moistur+rich+shampoo%2Cbeauty%2C138&sr=1-5",
+                        "https://www.amazon.com/Creme-Nature-Moisture-Shine-Shampoo/dp/B004YRTZG0/ref=sr_1_4?crid=1SZ3GIO6U0TPD&dib=eyJ2IjoiMSJ9.QP2CYff8g_5cF5WuXANT3822Wef8fNE2AP56QiDoJhKeieldKh_wLdALwCdNxf0VDrgSSHgMoZNZAthyhYAFNMkzwcp5lnqrfWTzuAnDxLSMIoFICejLlehGZYUM5omkapwAnMP0FVIZO5iBu9FiT--KoQGlY1VRXn5_IXNwGYbXyMjCNu4o3pXmRWeQ4O4FRODOyiJl1RWzm3Ho3onsR62S386jZWiTYBI63nyvTg72VQLkpTdOgmJR6D7wXKF2heybaCQOCIhle0girWKlCYstj3DdXTRlfWNJ-6V5zt0._KchAdZStONX83P_nu4Lr4DtfX_fnVDzq9a8glVtCu4&dib_tag=se&keywords=creme+of+nature+shampoo&qid=1725807723&s=beauty&sprefix=creme+of+%2Cbeauty%2C155&sr=1-4"],
+                "4b": ["https://www.amazon.com/ORIBE-Cleansing-Crème-Moisture-Control/dp/B010BJFQ2G/ref=sr_1_1?crid=1281WG3Z4SOIT&dib=eyJ2IjoiMSJ9.7oEJhvH-K1UC148-a16I7PJf7W223zc-3Zs-gLcE8W6Zq_lUYtsMTzPYPjDSJ0CrfgoEouz9MwprZSHlvYs687Kk9rWjHiwOWxqfh7bBUlFyMCo6pLHvYodIGvJ_TOa9GDx_B0y1idbxgrlknJsoDF1l8iPpPInUTdXz7pw-mRHt8g5Zlh8Svx7HKE9TzRiGSUsA0SoLcZD5pJgETRCimGcqQFio9q8r6flIFDBP33dCCEoUFVi2PIrLaidoUOCarLMM54Os6avAPNIEMAH5NZ1zoaB6ii7CsuIFIVR6dvw.P_L3yk8Qd6GjMxrtwtKDJQjYu69w4zKr3rqonSrPt4M&dib_tag=se&keywords=oribe+cleansing+creme&qid=1725807785&s=beauty&sprefix=oribe+cleansing+creme%2Cbeauty%2C146&sr=1-1",
+                        "https://www.amazon.com/Mielle-Pomegranate-Honey-Shampoo/dp/B07GZYV5ZX/ref=sr_1_5?crid=3O10LG4DFJI6R&dib=eyJ2IjoiMSJ9.pwsvFa7m0XWYwQeKKGOiSze7x6IoARz9eKcymW4kyXNC71xw09403y7NDH3zFftwDcmAikg8SI1I0UVRvquebgIca7mjJvBGeQsggcDRa87cN8ASi_KeCl4q5gEvPhpte8t3OmrqkYU_GtjB_voYqhMIckMJ905wvj9tvgKdPae51CJM_YjRFWaV8uSAEIyaHNcBwKRUTBtEvG_8xOHJvD2NfO1mFYru67Fjn4oodfPcWFzD4zOArFCMgjXIkG26tgc33eSIqM93AfUiMwwGEF75HGXkl911Kx-wWIsfDoI.XP_PVTsu749ab8B-z8WkZuLhOcZDcP1IUXAc1qyzWZU&dib_tag=se&keywords=mielle+shampoo&qid=1725807819&s=beauty&sprefix=mielle+shampoo+%2Cbeauty%2C138&sr=1-5",
+                        "https://www.amazon.com/Am-Curl-Clarity-Shampoo-Ounce/dp/B0065QZPI0/ref=sr_1_41?crid=3MJOJBL9G4N2N&dib=eyJ2IjoiMSJ9.2yR1rz7PRFctUOxe627GrO2Dm0ZXSTlR6sq8BxEG7krP5iDxPRh9PW2I8fM0KBokrqUmCgb946_1Dyquyvz12jlugKFiDCY90p-uM4d2yqWS7pFfoYG8ZsGOJgZ7bRcEhJ61yg4NWV5d4ly-vshyVjPNRZa3aSSwd7tDLdiiAigkf1yYVi0KKHxhrw77GVR12PqsCw2gFvUPnk1Kb9tibLmuMjpu4sY3p_ltLIPks8BbkBUGKifRlqv-7nzlbZmD8zFC2j4IqFO6WOi5aM2qxay_MyBJOC_YCe_V07L9lOg.QSxfaPVXZq0OClObRtoSXKYemiqzj5JaCSbXCgP6gSQ&dib_tag=se&keywords=as+i+am+shampoo&qid=1725807846&s=beauty&sprefix=as+i+am+s%2Cbeauty%2C141&sr=1-41"],
+                "4c": ["https://www.amazon.com/Rahua-Hydration-Conditioner-9-3-Fl/dp/B07D4NT9HY/ref=sr_1_5?crid=BKPHET3P3X7J&dib=eyJ2IjoiMSJ9.qjae9iynVblZbd0H_uBfgJx4NbNTnGmfYAL-mP0Eh_L3UX80qZnRCZWf7bsh0JeFNXFC4IS4a1vIwcMA4xg-EiGr3PkjxWA-YSH580ZVNWhtyN-hRu2HYvTAi9d0roOVrcgY66rBJDtrv4HjNxbd4rnS4i8_ZGXuolydFryXJ2tqwcLhKJfMnHsS1QEG2BxQgje65jkcXr7cmmSurxYsn9SHD_ooPcePHoWIcDZAUoW1F4Q_0Apf3IXnBpudrp54Jyuzt0OBcUUbFgGlbl6Y9dUla-ESyYln5g-VpKL_mLQ.pYGm5yX7V09fTTW-UJx-EUXZE7zwe_iD2_2kxJvhbEw&dib_tag=se&keywords=rahua+shampoo+and+conditioner&qid=1725807942&s=beauty&sprefix=rahua+%2Cbeauty%2C179&sr=1-5",
+                        "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo4MzgwMzI5MzU3ODEzMTE1OjE3MjU4MDc5ODc6c3BfYXRmOjMwMDEyNzU2MDA1NjAwMjo6MDo6&url=%2FSheaMoisture-Manuka-Intensive-Hydration-Shampoo%2Fdp%2FB00OO0J9UY%2Fref%3Dsr_1_3_sspa%3Fcrid%3D2HS9T3SJYP42J%26dib%3DeyJ2IjoiMSJ9.LdcZpietyov_mLt3Jwf6m5XYZHcm9mNMKMv3nUg9h_JiSKsvpo8Z4So9ISB09rOECHN85ufgXuLNRwGJTy-GDdkC3rPLl3mU-M4H3fmM0CE0s5evS8uSe8-j5XPkLVkZzbnj4LUlrPeO2zuBgL7QaefVDE2h5CJXzPiwG4WxcW4MUUw7kEIeX_hXXmNTE3McbQN5txrLaMkSDtUyzuKLYGzHFTEDsD-SEp7fyQas6p8Le-2KkGEQH9IdUbL_EkLvTWgDetc1xakBvx3how-kRR9qtYBG3lskwrdNZgVf858._5oII0BRY1FSH2JbJYyRwekFrjMeDWYkdlBO72oz9Qo%26dib_tag%3Dse%26keywords%3Dshea%2Bmoisture%2Bmanuka%2Bhoney%26qid%3D1725807987%26s%3Dbeauty%26sprefix%3Dshea%2Bmoisture%2Bmanuka%2Bhoney%252Cbeauty%252C139%26sr%3D1-3-spons%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9hdGY%26psc%3D1",
+                        "https://www.amazon.com/African-Pride-Moisture-Miracle-Coconut/dp/B081P11L1C/ref=sr_1_44?crid=21D9MRFMKZ0GH&dib=eyJ2IjoiMSJ9.eh--cZFzEgNjl9lug74iILklxiD_GLECF4oT2KWOCmOJVKJyzcBpW8DmQ9iaMDUDRPrETr611ctexx_LcZNxsQeXfV6asW3R2WrZ_KoWLx0uQVqo9OdOSnxKLKQzRJfPpanqye2qIMKNvM89ZaOz5HUOaBjn559Xlah7MSMS7VIrS3HwHk_lmVY4H-Y1si2AL23J9swswInMFr4ZNwRhKSr-M8gHlsA2BiKnkEdqxxJPxIiB0yGfaXSmEfKo_DY2i20G2jPRspF2umI9JgK1ZNF6yVuczN_kcn-CgvgnXXQ.NNKPOyBmIcE4pvVYDVgSS1Un7Ux9U2sJbDD5l4baGVY&dib_tag=se&keywords=african+pride+shampoo&qid=1725807364&s=beauty&sprefix=african+pride+shampoo%2Cbeauty%2C133&sr=1-44"]
+            },
+            "conditioner": {
+                "2a": ["https://www.amazon.com/ORIBE-Repair-Restore-Conditioner-6-8fl/dp/B00LCBNOPO/ref=sr_1_4?crid=1OVGIWFECAM72&dib=eyJ2IjoiMSJ9.VpH_iFCOs7YrWS-hlbkhqkCELRmrgc9lzLy9FGqA-9uPcD05BA043dpDdCJ-mzu8tjHdzJQbXSSlckIiOJq1J0nz8StA_wp4F8i1MiozMXdqGWkisizppB4XFZV-zWLBVWVxdgip6AXO8KudI4EtmEFrXizBSz1A53MhZJA-owuDFwSBH6rEDnGxxUIK_wIu-eYI8zrVnLdtogYPAYbJb11C1WZGAaRu3_HT6JuiBd6I-hCwzJGUZuFvwSShm2Q4z2ZiHcQKA0VnSlfgkQgUeJTVrDztfVesadlqjJZhbHE.yHRwQ079ZcBjFKNc0yuowWm6huT8g2uXkV4kUPVRIl8&dib_tag=se&keywords=oribe+gold+lust&qid=1725808617&sprefix=oribr+gold+lus%2Caps%2C151&sr=8-4",
+                        "https://www.amazon.com/Not-Your-Mothers-Naturals-Conditioner/dp/B01N9VQKQL/ref=sr_1_38?crid=NQGBPAE8HY0R&dib=eyJ2IjoiMSJ9.HvKD52nIRf6cToTTI5hcEW0Pg6Ka7lYd8Tuc7pvonAHQ7RemsiGM_dUnb70l8irkS5zKPqdcHxsmuiNaTuVWepmVPwzLYML_bU3Ny19YrB99k7aWIbOn81B9JgCxHEyTUI-7x3-JUUW4Qgo_5hdaCxyU0it5D9SxAJsWSnxZtCc1kLBDq6qxTqI1G5FLAl0XDlxzhw1GJYby8zkvZu0_XopCs6c4es6YRAlpDCXe_m-BtxXOrnZASUYTtcMed7UpdAmPcz_aE5ehWOOZf1R5FKPsD1LL6-Jvgjv3EwR3RC0.hBatkhABmuo8KnMRmQHRTibH0SHo7LI-E0cRucFUxOg&dib_tag=se&keywords=not+your+mother+conditioner&qid=1725808650&sprefix=not+your+mother+c%2Caps%2C160&sr=8-38",
+                        "https://www.amazon.com/Garnier-Fructis-Conditioner-Frizzy-Unmanageable/dp/B01M0X6PDL/ref=sr_1_11_mod_primary_new?crid=1R90JWQ3ND5YK&dib=eyJ2IjoiMSJ9.v3-ZRHyB96X5CRymcIn--MbpDA1ZbzIDDYMYDy-h4Cje317u5MOQej70xOmoxs-UYKOp03JF8q2bsPY4uiCtUv8nFnD8dgIX0DMp698GARahWUm-2FgD91LCua1WWZMr-_q-8x99PYns9iaFwTWSQXTlqXFJ5w7aoxtqFtJBQCJqdxLZBG38OxjE6e-tCR9Nac_huDYM8CXejzC6SGux3Ld8mPYEyqsZI4lLuRQW8WQ01IxvoV_Z8ECKzx8yM3XZJ1mJFuyJ06Lx0vnxSySK5Jg4dANSZ8GLyDsUfrKwVug.eMLR53XXRE6o2DW48TVXNa7Wz0ZRZ_tFji_Q2ZkmJZs&dib_tag=se&keywords=garnier+sleek+and+shine&qid=1725808685&rdc=1&sbo=RZvfv%2F%2FHxDF%2BO5021pAnSA%3D%3D&sprefix=garnier+sleek+and+shine%2Caps%2C141&sr=8-11"],
+                "2b": ["https://www.amazon.com/Ouidad-Curl-Quencher-Moisturizing-Conditioner/dp/B0001Y74WM/ref=sr_1_1?crid=2DA0PWDTPXFZS&dib=eyJ2IjoiMSJ9.ZiyH_sa_U2cF1J1vtO5R9i5DTx0-tJQzVdltZ4U2P5_2qyg8vzlAZm6h10bLr-B983bJ6GbGqnOA1bWNe1-KB3ZRxHq4y2FeTav5BRmVa5RTACXhpeNyOj4WFH5ypecVqDGTi0FjPyP6gAGWewyuZMcya6-V5XVk0J66aJT6CnwXd8NgBZbx6WFWEHEDcNcEXp9v5rGcYLHmHbQ8I3rJASbD9Km_JqXVyW2xmMEjY15giETiqRHRtxJ7uFXoin7zq6Q2IC6EVNp0XiHLQMk4BppA3KtZKgQSY-Bw7lmu4qA.6utsyqU3MWL4Zzn-XDu2c9v-kGnELI2EwxC8PM7Hvds&dib_tag=se&keywords=curl+quencher+conditioner&qid=1725808504&sprefix=curl+quencher+%2Caps%2C162&sr=8-1",
+                        "https://www.amazon.com/SheaMoisture-Coconut-Hibiscus-Shine-Conditioner/dp/B00EUMC62O/ref=sr_1_5_f3_0o_fs_mod_primary_alm?crid=16D70TR9AXDN6&dib=eyJ2IjoiMSJ9.zPPm2sZzZNKAiZSr37oO22Gei97juGD1ZqZZlHqRJUM0Y_K3kPgWxo7lUnBNjhZCPp72dNOlwC5sBMWP-5FuSW28DFS58cWp1SJJ2MKQ-EHLQ6iJu1GkMLC-qLeZXH0xXig-ZlxokmsHMqbfP4JmS5_CrCePCOINV9eN761MVmcTb9X4LmAbt6_1ADkU1SWr64aMn-S6iDck62bZPPzZPx71sf6sMmNtt57gQaIms3_dFTduV_RJ507o07c85G_TjAwxadeb5GFbtguxrMKUAdxlpHfLirW60QLxd7krykM.aZlxF4vAR8wOiFAosj9QqQim9tcuvnTjzDNkQg0N47o&dib_tag=se&keywords=shea+moisture+conditioner+coconut+hibiscus&qid=1725808553&rdc=1&sbo=m6DjfpMzMLDmL8pSMKX8hw%3D%3D&sprefix=shea+moisture+conditioner+coconut+hibiscus%2Caps%2C157&sr=8-5",
+                        "https://www.amazon.com/Suave-Professionals-Conditioner-Almond-Butter/dp/B00I69SXRE/ref=sr_1_2_f3_0o_fs?crid=1OW2PK9NJWZLB&dib=eyJ2IjoiMSJ9.CeOfrysQaE9kJ2n7wSvxxjvyK-xRbZYnjwBn1jEL-6nXbFiOj9TzKqs5aKikqjTsadSWjkktkOmqvnQVJnXdx_qK5P4yJL5yq_vOq52sz6db0DBeps3rOlEXNop6aTpiETiebB8lJZxtZGzMqYAxMTNUMpT5HNVou96FtrTE66oaKcPvCOxAcgs_PsobOkbBMemuZ9-I5wCag45IIR1VvwbkT9dBLcfeMtSqSoK7r3AfXgNFnqB73SJeCh98ZorZYYPpnUt6GNqqX6ZHEu3TgQH6fqiHuzrPDH1CXrNMexM.bPEFe2WCbiAqD0bmIiasol6nA9A8kGq7V0IoydsXZGY&dib_tag=se&keywords=suave+almond+and+shea+butter+conditioner&qid=1725808584&sprefix=suave+almo%2Caps%2C150&sr=8-2"],
+                "2c": ["https://www.amazon.com/ORIBE-Signature-Conditioner-6-8-Oz/dp/B07X9RYYNF/ref=sr_1_1_sspa?crid=1ZL05XL4FNAHL&dib=eyJ2IjoiMSJ9.veSBV1lv7PeRpcKY5I4gZwSu7lXvqWNkXI3uZD0NWbYbrcoUm-NaMmGU_16AxGQvKnXFOTqVU5gCXggDitrp5dU_oMTFJfTYrRqX-lt4qFUHkfAs-GwAQMpHCHGrdST7h1tqO5iR2ywI_TBD5-caOgzqnFfrImHjORuHu1n_ISDhnD2_ou-p_70k041nSwwjPwUOvumd3r0UPv_j2nZcPcL4FwQGXUGXt69aoFMqbuQmITdP8sN_VUHLXdlNafPFJk9Qbcc054BQlKEvf-5r84MiZFhjv7nS-0QMRTPLCPo.CakIMKpw9KMc4PO9W7VslqPKIoe5HDELVVxnGejsR_Y&dib_tag=se&keywords=oribe+conditioner&qid=1725806284&sprefix=oribe+%2Caps%2C162&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1",
+                        "https://www.amazon.com/Bumble-Curl-Conditioner-Liter/dp/B08H8VW9TZ/ref=sr_1_1_sspa?crid=EW54F116CM0Z&dib=eyJ2IjoiMSJ9.7bznjpKvPJgO6qfulBK0vpdjrB-0EQNKIkvzyj5gfduDwxNARzR0THv36WgIpapc5bUF9PAFBnIwN7WJDAcJZVwWJxbEmh5fgZiPkZ0h2N2vGy0SJKuaeS0GQDVapWJcaOqGvg6bbQBa_9k71ZhfnT4NKH-1DnFY7EV97Jj83fagbCxV7C2nspMvl8WN8zK2JUYE3KAaOb4oCg07Z0ez-QYaYYvAP6i4TGDC5q848hE9Qt0rZf0WTJnGFKfRC3N76REhtFUelgKv1gCOIcY_1yTqlIijJfojmFzKYFgx-_A.Lp8cMy0iujhnlCNzHUokBUhQ3toEsgNeaXOVU7toRx4&dib_tag=se&keywords=bb+curl+conditioner&qid=1725806312&sprefix=bb+curl+%2Caps%2C145&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1",
+                        "https://www.amazon.com/Jojoba-Oil-Lavender-Curls-Conditioner/dp/B09QH21L7V/ref=sr_1_1?crid=36GVHYEO1ZGY8&dib=eyJ2IjoiMSJ9.YuVmVGhletSZAoaG0ByA5_XZibc8U18LLZHCnzQTFZpWE7dTIQp3-EcRO5oojyga53DG-Ziu3yyHhUGoMGQ2Zohqj7p3PRP_1gVyuxCKzAGsdnBwGVUK90t_eSQGhTM5MWpOnFZMXH--z81HJQ8ZTpw6dQ86ZsZgBavrPLdXy1RrFqKr3EtUO4VM754KSDToRQECqL1zXCMpfFsO7mY_Vcx7hr5ceFp_R93jT8w9PnpZ4RcP35emrFfAs7k2gqySva1qKKVLcJxImrUuCvNXHoVhvyghZnHQ72Z4plP9B_4.w0i80DFie_Q9iTNADyhgXKJyyeJilGPGPn9b24BDzQo&dib_tag=se&keywords=herbal+essences+conditioner+lavender&qid=1725806550&sprefix=herbal+essences+conditioner+lavender%2Caps%2C188&sr=8-1"],
+                "3a": ["https://www.amazon.com/CURLSMITH-Essential-Moisture-Conditioner-Lightweight/dp/B0BPTBMJY4/ref=sr_1_1?crid=160SVT1FO5KNW&dib=eyJ2IjoiMSJ9.lNYemsEdx6N8cPG3KUb9Hbo0BRLihprOJeg56hw9vv-0P5ZSblDv_zDff7TK_57skxRHTWl2JdsDnJQiM7YfZotAV5qSHqKx01aBDiwYYPcxGEAkXgt7VExgYkIiLYcbThMZT25NGe96V3PDdc6JWzc3qccmutVUK_caivKMNY1f0JVnGHRqA50_evY5rkij3tclczvGMwX4pPOslZILcUocwjVlKEtBg6N2N-w1gayrpwMDhJXkAhJaLK1IZu-_AutXRMYtyd6yYNQj2fU3a9HjCRIxjmt3-peurODBxJM.iEI3VKopTw45tOfQoCGFNeUgQscz3z9bKMeRSR_xBlM&dib_tag=se&keywords=curlsmith+conditioner&qid=1725806777&s=beauty&sprefix=curlsmi%2Cbeauty%2C148&sr=1-1",
+                        "https://www.amazon.com/dp/B08SSCH7YW?ref=emc_p_m_5_i_atc",
+                        "https://www.amazon.com/dp/B00UB6EI3I?ref=emc_s_m_5_i_atc"],
+                "3b": ["https://www.amazon.com/KERASTASE-Manifesto-Fondamentale-Treatment-Protectant/dp/B0BMTVRWC6/ref=sr_1_1?crid=VJR6C0PZXXY1&dib=eyJ2IjoiMSJ9.DCLbyOXW47R1lUVApLDsl979qZ_HiovL9FgsueZJF91SnqMNDF4tqUNaLTfxkQ4DxuVMfDvHdA5DBxuSpxX4O7xlyg0_rCLvm1RqdSJd1w7RRpsxfH7y6-3UzyKfvABhChumNtna8kod7lirLYEZ6RRDDUeannMlH_aoTDchnTaL6_lF7RIl5JgzLpYq1IwtUR-qdT9EA0piO_6_6iBIUFd28ay29ivtrT6BsduViri3--NC5pi_e_-0KWZ1lhAzuzHWUCVkk8uuB8nU4UXG1wF0cKZMYZFUp1NvMbdQo24.ZQzAZ9NORzpvY-q9dRtptCj9psEnOH9mrT0lUAwv2mA&dib_tag=se&keywords=kerastase+curl+manifesto&qid=1725807034&s=beauty&sprefix=kerastase+curl+%2Cbeauty%2C148&sr=1-1",
+                        "https://www.amazon.com/dp/B077GRKR83?ref=emc_s_m_5_i_atc",
+                        "https://www.amazon.com/dp/B07BVTX1RL?ref=emc_p_m_5_i_atc"],
+                "3c": ["https://www.amazon.com/Pattern-Conditioner-Coilies-Safflower-Textures/dp/B07YS21Q1C/ref=sr_1_5?crid=2JSNHA6UGEB82&dib=eyJ2IjoiMSJ9.Xl_ici_RTFJzMRBWhuJIrrI8yZwTp_v_XRP0jueXmZO47P3YyRJv6bf3ylbbFMuVbKcmERI8NcaEXmqHwW-5U1eBfwJwkk-xH1mSd8iiuJN667XHqbGDSsOcs3lTkRzil9QcBKmE-oOQa9NaG7UxtOg8hT4GHlFQUkaXNFzBxS92_R1e7l2m_D6-DEbkimZIv3ScMJIZf0rxtKLAdgaVHI_kShmspIBiFcg1eQUzyYeE1_rOcRhmkCE8IH3qs2c1eLjaICfUREkRsWO19iv7y10eA9DZzzSx4ChEFP2ODhg.deYexnupgeFr-QC-XgEmu0dSFVREoD-sPegEH3Mtaxo&dib_tag=se&keywords=pattern+heavy+conditioner&qid=1725807211&s=beauty&sprefix=pattern+heavy+conditione%2Cbeauty%2C138&sr=1-5",
+                        "https://www.amazon.com/Shea-Moisture-Jamaican-Strengthen-Conditioner/dp/B00V6GPXZO/ref=sr_1_16_mod_primary_new?dib=eyJ2IjoiMSJ9.2_4BdwdxXfBlGsio1lDUNyckYGtaeFMGZ2yaXlGJUMm31mhj8RtM0DKWirreSgCx0McBvgX62JTgn1hbcwrTYCkROQzs5P5vFynSs_H-RMW4hrtOZ4HNvPdXGGqr5bNCz-1H0sOKtoPVhReBBPeztAicUoHdSYDgZ6jnsa8MG4cJ9EP3G7-0R_ErBExpwY105YGyF13PU3dnk-Z7NFk_w_dhEeGMm7ii4lFzdiH91o7i_ylGc2y6bWpSktefP_-92Zo-nyXN2visS3tr7kt-5j8RVG_v6OY1L2UX73ylVXA.reep8f7zRFyhuKMK5zkBk5ogEf1VDIh0PspxXJmW8vI&dib_tag=se&keywords=shea+moisture+castor+oil&qid=1725807250&rdc=1&s=beauty&sbo=RZvfv%2F%2FHxDF%2BO5021pAnSA%3D%3D&sr=1-16",
+                        "https://www.amazon.com/African-Pride-Moisture-Chocolate-Conditioner/dp/B07F7CQ7XZ/ref=sr_1_6?crid=2WK1WN6YX3N4A&dib=eyJ2IjoiMSJ9.nLHA40BZrEpi_6YDqiXHKlGA1UgHEztZSxFHs6dYX6P2PrHGaQ-hjK8JnrMiMlEXfrb7ETxKbImAYHQeo8be6LW_4JxrR40Zj1aq3F21kQg1XZaJS4z5ays1V5tIONIOM5Zlm7Bk1agvW76rd2R59f-FkKeVa8K7ZyhFO8c16oA5RDCzQvAYcDyql_EpzeplfW7Uq8CXVbGQetfG3qb7BSDTBeEyYgWWYj9VzFTkLEcFf5qAjjqImTq0MbxgXzAzJ91llxbp_BnvaYC4P0oVcyxoMHwp0MTGCcDxJeRVUH4.ZPuwXFYH87dJwrtzI8yjJfA-OZYfQEekA6qHx3YnUhE&dib_tag=se&keywords=african+pride+conditioner&qid=1725807437&s=beauty&sprefix=african+pride+conditione%2Cbeauty%2C146&sr=1-6"],
+                "4a": ["https://www.amazon.com/Briogeo-Conditioning-Hydration-Chemically-Lifeless/dp/B00J4R760C/ref=sr_1_5?crid=H7SKT4S4MO73&dib=eyJ2IjoiMSJ9.YhwWwX2V-AkIhXvyE6ZwBzcB5b-pjxVW-pKDK276gD3rpOGG8iKBQFOLJcKkaLmZ6bCjtDtO2onBNEJ55K0aRtxDqkl9SSmQNqMes-oqfrK_o18MoeC8bVRvKXx6FeW_HV8Na5xXEwatwUxqVv9wGUf2dhsi5uEHuSJzRXZrTI0aYK57tr3ryqUBlskFbIJOuIyCDlKNc9K_0V_zV4oifNkJbZr7k6Qm26-_uo11PAz-sUj9RtHbrPEwRyVH76-swsb3Rmp4VdrdHIDc36JHbevIMwfPNLif158MacY8Jx4.sIyk9ozyD8PqcXKzFlmNjG3E97EKcB_A4bFXMDOJVdA&dib_tag=se&keywords=briogeo+don%27t+despair+conditioner&qid=1725808399&sprefix=briogeo+don%2Caps%2C146&sr=8-5",
+                        "https://www.amazon.com/Triple-Moisture-Replenishing-Conditioner-Natural/dp/B00FLI1YLK/ref=sr_1_10?crid=1UFOY8WKGK8E0&dib=eyJ2IjoiMSJ9.81T4V3sGxfcc19m7d5KWKBCS_Fv7Nevs0edUL8UfwOyW7Fs_VJpDQax4mpXFbs95cFKVTD5uYgzTtMhaGQHaiUNZrj7THICzA0eXh6ykFZXsuYcc5oQ8lmhtb7mIH4s9GNv9J_0NZ3B1KK84v0tzvMEjqaRqIYE7yivFqJEyHKRHFMFL7aK8mR9ce-nSrlCWQbhpkZ5To699myKQWf7mQt7ecmluZxYjKuVvtaMFAIjD2UJ1YTKsf-V11kuFUEnuO_IENBafmc6dVSPfAwx111efwjYg7ZmqnOx1e4-00IU.yp50XMBg1393UeXZGkxVXmkgx9UrS2LHUikT7sLaxW0&dib_tag=se&keywords=tgin+moisture+rich+shampoo&qid=1725807622&s=beauty&sprefix=tgin+moistur+rich+shampoo%2Cbeauty%2C138&sr=1-10",
+                        "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo0NTU1NjMxNTU5MjEyNjA1OjE3MjU4MDc3MjQ6c3BfYXRmOjIwMDAyOTkzNTU5Mjk5ODo6MDo6&url=%2FCreme-Nature-Intensive-Conditioning-Treatment%2Fdp%2FB004YRVCGQ%2Fref%3Dsr_1_1_sspa%3Fcrid%3D1SZ3GIO6U0TPD%26dib%3DeyJ2IjoiMSJ9.QP2CYff8g_5cF5WuXANT3822Wef8fNE2AP56QiDoJhKeieldKh_wLdALwCdNxf0VDrgSSHgMoZNZAthyhYAFNMkzwcp5lnqrfWTzuAnDxLSMIoFICejLlehGZYUM5omkapwAnMP0FVIZO5iBu9FiT--KoQGlY1VRXn5_IXNwGYbXyMjCNu4o3pXmRWeQ4O4FRODOyiJl1RWzm3Ho3onsR62S386jZWiTYBI63nyvTg72VQLkpTdOgmJR6D7wXKF2heybaCQOCIhle0girWKlCYstj3DdXTRlfWNJ-6V5zt0._KchAdZStONX83P_nu4Lr4DtfX_fnVDzq9a8glVtCu4%26dib_tag%3Dse%26keywords%3Dcreme%2Bof%2Bnature%2Bshampoo%26qid%3D1725807723%26s%3Dbeauty%26sprefix%3Dcreme%2Bof%2B%252Cbeauty%252C155%26sr%3D1-1-spons%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9hdGY%26psc%3D1"],
+                "4b": ["https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo2ODE0NDEzMDk3MzY0MjY5OjE3MjU4MDgzMTY6c3Bfc2VhcmNoX3RoZW1hdGljOjMwMDM2NDk4NjIwNTMwMjo6MTo6&url=%2FBriogeo-Coconut-Nourishing-Superfood-Conditioner%2Fdp%2FB07TLGDBY6%2Fref%3Dsxin_16_pa_sp_search_thematic_sspa%3Fcontent-id%3Damzn1.sym.140400a7-1208-46ad-8d2a-eb6e8eac81b5%253Aamzn1.sym.140400a7-1208-46ad-8d2a-eb6e8eac81b5%26crid%3D1ESFGIYRVG25Z%26cv_ct_cx%3Dbriogeo%2Bsuperfood%26dib%3DeyJ2IjoiMSJ9.dCY1sTNnyxEEgwsrNfu5HqBlrN2A65KnU34XouOiQQR1nn694Zk8IuKjx22gNJs61B6uVpy0msBBNGNYnzZ4lA.xLWGPmdzvcICvVql2zd7UI3jbmhVaxbL1OoB-Czx1Dc%26dib_tag%3Dse%26keywords%3Dbriogeo%2Bsuperfood%26pd_rd_i%3DB07TLGDBY6%26pd_rd_r%3D4a40a052-096c-4720-b3e0-a598e369f2d1%26pd_rd_w%3DNv4Dp%26pd_rd_wg%3DTgMRZ%26pf_rd_p%3D140400a7-1208-46ad-8d2a-eb6e8eac81b5%26pf_rd_r%3D4F1PDDBYVXEWPXCH1C1K%26qid%3D1725808315%26s%3Dbeauty%26sbo%3DRZvfv%252F%252FHxDF%252BO5021pAnSA%253D%253D%26sprefix%3Dbriogeo%2Bsuperfood%252Cbeauty%252C139%26sr%3D1-2-6024b2a3-78e4-4fed-8fed-e1613be3bcce-spons%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM%26psc%3D1",
+                        "https://www.amazon.com/Honey-Miracle-Conditioner-Natural-Olive/dp/B00FN3EIS4/ref=sr_1_1?crid=3UISMXEIRZ2KU&dib=eyJ2IjoiMSJ9.cMcA6lS7DqQUTNDPqesPrar24kPedSqBHsHNoXMLsmdXTRlyJ8sc1pn3peIP1elejZyYXcpbpqcxNxt2pB9s368TIxbYJMnyIkpHMZpknJ0aZNfE2emKsC8ROc885o9huOskFaxWlmun9hfimvqMnj3pJeLYGJ7lenszhoD0NrlSaZlOFLpUh4E_K1-bpfo6wHexRKL8RFkRKAdNCNLaT5DUMyDXoS_STzKIdhRIDC8m6KT-JjL13-iQvkjQJJ6d7RaQOPfB1c3AoLzl7gTDfiwaHknqX5SgjREPNR9K1H0.iaArjDO4QWegzeH6WarS6T5xjzXEsRXxA0HIqJqBOxs&dib_tag=se&keywords=tgin+miracle+mask&qid=1725808358&s=beauty&sprefix=tgin+miracle+mask%2Cbeauty%2C131&sr=1-1",
+                        "https://www.amazon.com/As-Am-Detangling-Conditioner-Releaser/dp/B00K8BHLZ8/ref=sr_1_47?crid=3MJOJBL9G4N2N&dib=eyJ2IjoiMSJ9.2yR1rz7PRFctUOxe627GrO2Dm0ZXSTlR6sq8BxEG7krP5iDxPRh9PW2I8fM0KBokrqUmCgb946_1Dyquyvz12jlugKFiDCY90p-uM4d2yqWS7pFfoYG8ZsGOJgZ7bRcEhJ61yg4NWV5d4ly-vshyVjPNRZa3aSSwd7tDLdiiAigkf1yYVi0KKHxhrw77GVR12PqsCw2gFvUPnk1Kb9tibLmuMjpu4sY3p_ltLIPks8BbkBUGKifRlqv-7nzlbZmD8zFC2j4IqFO6WOi5aM2qxay_MyBJOC_YCe_V07L9lOg.QSxfaPVXZq0OClObRtoSXKYemiqzj5JaCSbXCgP6gSQ&dib_tag=se&keywords=as+i+am+shampoo&qid=1725807846&s=beauty&sprefix=as+i+am+s%2Cbeauty%2C141&sr=1-47"],
+                "4c": ["https://www.amazon.com/sspa/click?ie=UTF8&spc=MToyMzMxNzc0NDA0Nzk1ODMxOjE3MjU4MDc5NDI6c3BfYXRmOjMwMDE5NDM3MDUzMDIwMjo6MDo6&url=%2FRahua-Classic-Conditioner-9-3-Fl%2Fdp%2FB077VWWLJ3%2Fref%3Dsr_1_2_sspa%3Fcrid%3DBKPHET3P3X7J%26dib%3DeyJ2IjoiMSJ9.qjae9iynVblZbd0H_uBfgJx4NbNTnGmfYAL-mP0Eh_L3UX80qZnRCZWf7bsh0JeFNXFC4IS4a1vIwcMA4xg-EiGr3PkjxWA-YSH580ZVNWhtyN-hRu2HYvTAi9d0roOVrcgY66rBJDtrv4HjNxbd4rnS4i8_ZGXuolydFryXJ2tqwcLhKJfMnHsS1QEG2BxQgje65jkcXr7cmmSurxYsn9SHD_ooPcePHoWIcDZAUoW1F4Q_0Apf3IXnBpudrp54Jyuzt0OBcUUbFgGlbl6Y9dUla-ESyYln5g-VpKL_mLQ.pYGm5yX7V09fTTW-UJx-EUXZE7zwe_iD2_2kxJvhbEw%26dib_tag%3Dse%26keywords%3Drahua%2Bshampoo%2Band%2Bconditioner%26qid%3D1725807942%26s%3Dbeauty%26sprefix%3Drahua%2B%252Cbeauty%252C179%26sr%3D1-2-spons%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9hdGY%26psc%3D1",
+                        "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo4MzgwMzI5MzU3ODEzMTE1OjE3MjU4MDc5ODc6c3BfYXRmOjMwMDQwMDM1NTcyODgwMjo6MDo6&url=%2FSheaMoisture-Manuka-Intensive-Hydration-Conditioner%2Fdp%2FB00OVQO66S%2Fref%3Dsr_1_2_sspa%3Fcrid%3D2HS9T3SJYP42J%26dib%3DeyJ2IjoiMSJ9.LdcZpietyov_mLt3Jwf6m5XYZHcm9mNMKMv3nUg9h_JiSKsvpo8Z4So9ISB09rOECHN85ufgXuLNRwGJTy-GDdkC3rPLl3mU-M4H3fmM0CE0s5evS8uSe8-j5XPkLVkZzbnj4LUlrPeO2zuBgL7QaefVDE2h5CJXzPiwG4WxcW4MUUw7kEIeX_hXXmNTE3McbQN5txrLaMkSDtUyzuKLYGzHFTEDsD-SEp7fyQas6p8Le-2KkGEQH9IdUbL_EkLvTWgDetc1xakBvx3how-kRR9qtYBG3lskwrdNZgVf858._5oII0BRY1FSH2JbJYyRwekFrjMeDWYkdlBO72oz9Qo%26dib_tag%3Dse%26keywords%3Dshea%2Bmoisture%2Bmanuka%2Bhoney%26qid%3D1725807987%26rdc%3D1%26s%3Dbeauty%26sprefix%3Dshea%2Bmoisture%2Bmanuka%2Bhoney%252Cbeauty%252C139%26sr%3D1-2-spons%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9hdGY%26psc%3D1",
+                        "https://www.amazon.com/African-Pride-Moisture-Moroccan-Activated/dp/B07CVPKNMM/ref=sr_1_5?crid=3KOWQ1UDF4X36&dib=eyJ2IjoiMSJ9.zwOgZ99HE-6BvV-evUJBAVdQ_Jzco3OY2HsyxoAxwwt5U83tSpT4cnAdLn6x-L1YKknI23H8V-Uy1uw4GwLaDGPlDdDbA75PnRNvDbP3GQ69nLY5DXk7uLCa5D60f8cz-ePUBhyyl4R0L3teUtQLXnEQPyfrV3IPNNJQ-mJ7X3NpG5lTL1eI5gzSgyOSYt6uvBbNj-33pTGGbsTcAO-GHMV4O4Z9bFin-xDi6rmN3t5Ow5EuabHszpUPComyVo_Hzb2nJ4vzpGkVKh0Y1vG0MTvnaV6uyKpEzo00ZDZtyUk.u1eoEk2ga6CT8X4ykaR1UyhkvjREVVDHhUBAEpYRAPQ&dib_tag=se&keywords=african+pride+deep+conditioner&qid=1725808258&s=beauty&sprefix=african+pride+deep+conditioner%2Cbeauty%2C313&sr=1-5"]
+            },
+            "leaveIn":{
+                "2a" : {
+                    "Low porosity": ["https://www.amazon.com/Innersense-Organic-Beauty-Leave-Cruelty-Free/dp/B004KM1OEK/ref=sr_1_4?crid=2T473S9W0W9LL&dib=eyJ2IjoiMSJ9.GGIqpKoNWqVbprrcyIMuN6vZFfFzpKPGmZnbtbkBwmvXPO3EFRqTRrYT4Xfy9iJW1ermsNL_QZcrYKyeBonNDdy95r79YgWIMA3cnzM_XUaexsPclMSmB-fgxke7PbmW4O00sWPLn8Sr6K_NfQD-iIP6Lc9_vK4h7Oe6m83GlD5GNisinqCq3sKauCk7qTaojaiGCEaO6GQ6l6hI9SES1mUffFM-DPNPdkuCwCfG3MNReHzDTdj25c_rE7gm6sjldYLNjYA5g8tYL-LJERTWZ78JMf94RgkjGLjlxJAGlU8.2aCc0WFvVCptuWtXgJfKvfgNLqAuiAuXn3b8w2Rq2zI&dib_tag=se&keywords=innersense+leave+in&qid=1725809505&sprefix=innersense+leave+in+%2Caps%2C158&sr=8-4",
+                                    "https://www.amazon.com/Ouidad-Moisture-Lock-Leave-Conditioner/dp/B002HM3EM0/ref=asc_df_B002HM3EM0/?tag=hyprod-20&linkCode=df0&hvadid=693311398068&hvpos=&hvnetw=g&hvrand=15542131819589349998&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=1014327&hvtargid=pla-612193850367&psc=1&mcid=f4170ea88db633b3b3cbedf0e2b59bf5",
+                                    "https://www.amazon.com/Mixed-Chicks-Defining-Eliminating-Conditioner/dp/B089PR95BJ/ref=sr_1_29?crid=8QCN3LZ5JKU9&dib=eyJ2IjoiMSJ9.1LcwfIUUp5cbgJgtnJqdnaZZ4hq4vDROdt_E8gi0HhL5UzIICQP6mYhXTuRSKLNr26ryu05-PumwzujFCG3lXf-rbvA82aexHiEtHwtJR-v-FjqbZ5xKMOuTrcFJibnB5Es4F4aWjkJxxDNGvJGpkG8zlHmlP1JcxqaTo22f6vwqqZNkWdA5HKzoH34CKkl-J2MdfRAURAaxdt6L6AtBw4fpcdryWJke3soOYElEOqMJBdE_OEZKFxMawFFMrKZshD2T9p9VnGgdoZ_lYBmbR3QYyzIcz051cTgd7vj55LI.w6V4XE02zsFkCfUZpYnidqzfAcfxbbpob2W3FcISnJ8&dib_tag=se&keywords=leave+in+conditioner+for+curly+hair&qid=1725809638&s=beauty&sprefix=leave+in+con%2Cbeauty%2C169&sr=1-29"],
+                    "Normal porosity": ["https://www.amazon.com/Carols-Daughter-Moisture-Conditioner-Packaging/dp/B001AWXPAY/ref=sr_1_35?crid=8QCN3LZ5JKU9&dib=eyJ2IjoiMSJ9.1LcwfIUUp5cbgJgtnJqdnaZZ4hq4vDROdt_E8gi0HhL5UzIICQP6mYhXTuRSKLNr26ryu05-PumwzujFCG3lXf-rbvA82aexHiEtHwtJR-v-FjqbZ5xKMOuTrcFJibnB5Es4F4aWjkJxxDNGvJGpkG8zlHmlP1JcxqaTo22f6vwqqZNkWdA5HKzoH34CKkl-J2MdfRAURAaxdt6L6AtBw4fpcdryWJke3soOYElEOqMJBdE_OEZKFxMawFFMrKZshD2T9p9VnGgdoZ_lYBmbR3QYyzIcz051cTgd7vj55LI.w6V4XE02zsFkCfUZpYnidqzfAcfxbbpob2W3FcISnJ8&dib_tag=se&keywords=leave+in+conditioner+for+curly+hair&qid=1725809638&s=beauty&sprefix=leave+in+con%2Cbeauty%2C169&sr=1-35",
+                                        "https://www.amazon.com/dp/B0CC9QMVW7/ref=sspa_dk_detail_4?psc=1&pf_rd_p=8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_r=4K65GNVJK2RQ0RVNMZ4R&pd_rd_wg=3iBEl&pd_rd_w=nXCdk&content-id=amzn1.sym.8c2f9165-8e93-42a1-8313-73d3809141a2&pd_rd_r=b700cf98-9c22-44ad-8476-2a46b26f146f&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw",
+                                        "https://www.amazon.com/dp/B078PJCVSQ/ref=sspa_dk_detail_4?psc=1&pf_rd_p=953c7d66-4120-4d22-a777-f19dbfa69309&pf_rd_r=N18HPR6EDTF3J5B1AYYC&pd_rd_wg=m7Dep&pd_rd_w=Xrm4Z&content-id=amzn1.sym.953c7d66-4120-4d22-a777-f19dbfa69309&pd_rd_r=d518b76e-d6bc-4dbb-9cf7-c4639b60a6e7&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWwy"],
+                    "High porosity": ["https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo0NzI2MzE0NTYyNzQ5MDQ0OjE3MjU4MDk5MDU6c3BfZGV0YWlsOjMwMDM3Mzc2MTYxMjcwMjo6Ojo&url=%2Fdp%2FB07YFF1NQQ%2Fref%3Dsspa_dk_detail_0%3Fpsc%3D1%26pd_rd_i%3DB07YFF1NQQ%26pd_rd_w%3DP8yS7%26content-id%3Damzn1.sym.8c2f9165-8e93-42a1-8313-73d3809141a2%26pf_rd_p%3D8c2f9165-8e93-42a1-8313-73d3809141a2%26pf_rd_r%3DP4ZB5CP2V6RAS33FX6HD%26pd_rd_wg%3D2omnQ%26pd_rd_r%3Ddd7b74c1-4d65-47f1-9c20-624dfc2920c5%26s%3Dbeauty%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9kZXRhaWw",
+                                    "https://www.amazon.com/dp/B075PTHVKN/ref=sspa_dk_detail_6?psc=1&pd_rd_i=B075PTHVKN&pd_rd_w=tr3uc&content-id=amzn1.sym.8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_p=8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_r=635WAPPD1SP6DZ7FFYWH&pd_rd_wg=StIqN&pd_rd_r=997b89e5-c98b-46b5-a958-dee634cd26c4&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw",
+                                    "https://www.amazon.com/Marc-Anthony-Leave-In-Conditioner-Detangler-Spray/dp/B076FHJ3K5/ref=pd_ci_mcx_pspc_dp_d_2_t_3?pd_rd_w=g6UyX&content-id=amzn1.sym.568f3b6b-5aad-4bfd-98ee-d827f03151e4&pf_rd_p=568f3b6b-5aad-4bfd-98ee-d827f03151e4&pf_rd_r=5S71B9SJTY1YEFNVD5WQ&pd_rd_wg=OXkew&pd_rd_r=74d4dabc-c6d3-4fde-85d7-4b8ff6722206&pd_rd_i=B076FHJ3K5"]
+                },
+                "2b" : {
+                    "Low porosity": ["https://www.amazon.com/dp/B06XGNFR66/ref=sspa_dk_detail_3?psc=1&pd_rd_i=B06XGNFR66&pd_rd_w=aR7UA&content-id=amzn1.sym.8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_p=8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_r=SNHAG0JJFV120TE9M4G6&pd_rd_wg=eNuoR&pd_rd_r=26200b2a-cc20-4be7-b8db-8ee3ad472227&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw",
+                                    "https://www.amazon.com/LOreal-Paris-EverPure-Treatment-Detangling/dp/B09HN5ZF8C/ref=sr_1_1?crid=N45EDK308T7K&dib=eyJ2IjoiMSJ9.bM93OEqXUvVoZ3tanrwnjTivDNl9O2ra2cadyVzKNlwmDav6h3dw7t8PRYl22hO0O_XDmSxRATLiBevNgw7SDJp8PshD38gWENhX0wpLe3UT4XlgzX1aFJDTKEwZPJur85IHuuXDfpeMyn1WepQuRpVGU9p80a59LH4uNMedH6MA-hohcTWCELzqyIjKEGEOOkIsUf6og3RDyM7pyhGDlDfIqwlcKss6qKHMgVRE5nETH3YmdOwhkzHXNNNgnPMM_yy7oDg6jVSwu4xTNHAvbRCRLlALwAgiyg-LhO4wgAY.MHNfCRkNnvFndsC_JkDBv3gB2yKyudZEFDp0JmMVLQg&dib_tag=se&keywords=loreal+leave+in&qid=1725810206&rdc=1&s=beauty&sprefix=loreal+leave+in+%2Cbeauty%2C142&sr=1-1",
+                                    "https://www.amazon.com/dp/B0BP1GYZS3/ref=sspa_dk_detail_5?psc=1&pf_rd_p=8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_r=SNHAG0JJFV120TE9M4G6&pd_rd_wg=eNuoR&pd_rd_w=aR7UA&content-id=amzn1.sym.8c2f9165-8e93-42a1-8313-73d3809141a2&pd_rd_r=26200b2a-cc20-4be7-b8db-8ee3ad472227&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw"],
+                    "Normal porosity": ["https://www.amazon.com/VITAMAN-Leave-Conditioner-Quandong-Argan/dp/B0C6N15TG9/ref=pd_ci_mcx_pspc_dp_d_2_t_3?pd_rd_w=8flyP&content-id=amzn1.sym.568f3b6b-5aad-4bfd-98ee-d827f03151e4&pf_rd_p=568f3b6b-5aad-4bfd-98ee-d827f03151e4&pf_rd_r=Y9FVVRQEQC3E1GVXR0X7&pd_rd_wg=F4RED&pd_rd_r=5bf4cb63-36f8-45d3-91f4-1fea19869034&pd_rd_i=B0C6N15TG9",
+                                        "https://www.amazon.com/dp/B00YO38G4Q/ref=sspa_dk_detail_7?psc=1&pd_rd_i=B00YO38G4Q&pd_rd_w=cgO44&content-id=amzn1.sym.8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_p=8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_r=6WBVN7YSNZ4ST09GH40N&pd_rd_wg=lqsZO&pd_rd_r=57003295-68b6-4d25-b69b-de6d8a9dcceb&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw",
+                                        "https://www.amazon.com/dp/B005PV0FDG/ref=sspa_dk_detail_3?psc=1&pd_rd_i=B005PV0FDG&pd_rd_w=h1Co2&content-id=amzn1.sym.f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pf_rd_p=f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pf_rd_r=AA35C33RPP7X3VKTNNJC&pd_rd_wg=l64tX&pd_rd_r=438c1164-146c-4ae0-b899-288f323cfca1&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWxfdGhlbWF0aWM"],
+                    "High porosity": ["https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo2MDcyMTMzMTA1MjM4MjQzOjE3MjU4MTA2NDM6c3BfZGV0YWlsOjMwMDM3Mzc2MTYxMjcwMjo6Ojo&url=%2Fdp%2FB07YFF1NQQ%2Fref%3Dsspa_dk_detail_3%3Fpsc%3D1%26pd_rd_i%3DB07YFF1NQQ%26pd_rd_w%3DFOAvh%26content-id%3Damzn1.sym.8c2f9165-8e93-42a1-8313-73d3809141a2%26pf_rd_p%3D8c2f9165-8e93-42a1-8313-73d3809141a2%26pf_rd_r%3DNXNX31VKE676FM0MGY9Z%26pd_rd_wg%3DkD2v4%26pd_rd_r%3D40f88342-db16-4029-8b9b-d3b44dc22a7b%26s%3Dbeauty%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9kZXRhaWw",
+                                    "https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo2MDcyMTMzMTA1MjM4MjQzOjE3MjU4MTA2NDM6c3BfZGV0YWlsOjIwMDEzNzAwNzE4NjM5ODo6Ojo&url=%2Fdp%2FB005NOPAAS%2Fref%3Dsspa_dk_detail_4%3Fpsc%3D1%26pd_rd_i%3DB005NOPAAS%26pd_rd_w%3DFOAvh%26content-id%3Damzn1.sym.8c2f9165-8e93-42a1-8313-73d3809141a2%26pf_rd_p%3D8c2f9165-8e93-42a1-8313-73d3809141a2%26pf_rd_r%3DNXNX31VKE676FM0MGY9Z%26pd_rd_wg%3DkD2v4%26pd_rd_r%3D40f88342-db16-4029-8b9b-d3b44dc22a7b%26s%3Dbeauty%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9kZXRhaWw",
+                                    "https://www.amazon.com/dp/B0B8Q8NQ66/ref=sspa_dk_detail_6?psc=1&pf_rd_p=f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pf_rd_r=MS3T3H76KAMY60X10RKA&pd_rd_wg=kAWJa&pd_rd_w=RqoNC&content-id=amzn1.sym.f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pd_rd_r=e9ec3520-acab-4eb7-b415-ffb438aa340e&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWxfdGhlbWF0aWM"]
+                },
+                "2c" : {
+                    "Low porosity": ["https://www.amazon.com/sspa/click?ie=UTF8&spc=MTo0MjU2MzE3MDQ2OTgxMDM2OjE3MjU4MTA4Mjk6c3BfZGV0YWlsX3RoZW1hdGljOjIwMDE3OTg5Njg3Nzg5ODo6Ojo&url=%2Fdp%2FB0143LPT4S%2Fref%3Dsspa_dk_detail_4%3Fpsc%3D1%26pd_rd_i%3DB0143LPT4S%26pd_rd_w%3DVyPPJ%26content-id%3Damzn1.sym.f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc%26pf_rd_p%3Df2f1cf8f-cab4-44dc-82ba-0ca811fb90cc%26pf_rd_r%3DAHP80EAVBYQ9TF8PADPN%26pd_rd_wg%3D4NZ0J%26pd_rd_r%3D0d9f013a-54b1-4621-ab86-c498371d3086%26s%3Dbeauty%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9kZXRhaWxfdGhlbWF0aWM",
+                                    "https://www.amazon.com/dp/B08LYBGKZC/ref=sspa_dk_detail_4?psc=1&pd_rd_i=B08LYBGKZC&pd_rd_w=VrGkR&content-id=amzn1.sym.f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pf_rd_p=f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pf_rd_r=HTGSF47T2JKQMWWQ6FP9&pd_rd_wg=ItOGu&pd_rd_r=8ab9afa8-62ae-4772-9cfe-fcd2dd98de6f&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWxfdGhlbWF0aWM",
+                                    "https://www.amazon.com/dp/B07MGKNJJZ/ref=sspa_dk_detail_6?pd_rd_i=B08FRTPBLP&pd_rd_w=VrGkR&content-id=amzn1.sym.f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pf_rd_p=f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pf_rd_r=HTGSF47T2JKQMWWQ6FP9&pd_rd_wg=ItOGu&pd_rd_r=8ab9afa8-62ae-4772-9cfe-fcd2dd98de6f&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWxfdGhlbWF0aWM&th=1"],
+                    "Normal porosity": ["https://www.amazon.com/dp/B00YO38G4Q/ref=sspa_dk_detail_7?psc=1&pd_rd_i=B00YO38G4Q&pd_rd_w=cgO44&content-id=amzn1.sym.8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_p=8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_r=6WBVN7YSNZ4ST09GH40N&pd_rd_wg=lqsZO&pd_rd_r=57003295-68b6-4d25-b69b-de6d8a9dcceb&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw",
+                                        "https://www.amazon.com/dp/B0B5HQHR5V/ref=sspa_dk_detail_7?psc=1&pf_rd_p=f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pf_rd_r=GSA4S94EKTVPBJPR8GA9&pd_rd_wg=Z8y5H&pd_rd_w=Eu6As&content-id=amzn1.sym.f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pd_rd_r=49effd56-1a59-4dc7-9e9b-93b2d875df87&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWxfdGhlbWF0aWM",
+                                        "https://www.amazon.com/Ouai-OUAI-Leave-In-Conditioner/dp/B07B895KND/ref=sr_1_21_sspa?crid=10R6AI2SQI4JW&dib=eyJ2IjoiMSJ9._BPmC6NbSQEKbOPnla7b447XaC0WuBmOsGy431zh1rWBjGJfq1XqxUVNI1j3VLgjrDSYj-bYDWOCCLlwiqRmG9__jl8tpgPk5lgHOHneMYIRZt-5NcaTDA4dWpcgeL3cc7_FWc0TJsads4lNiqx53ztNtrHak3rbY1t6CwpOAazgUCZgYAyrKH7OB9QLv5m0WINugsVow6T2-ybCsKGCk3g9e2t2OZwh3wnINNfslvCpGIQeV3ZOu316du20sxjNOEC1JPt2RvocP7u8InPIs6y2H90AYeQb9HB32UrlzYo.cbpT1SnGJyp_79IeuZ50EA67f5mnD6KvIfrXryQjARk&dib_tag=se&keywords=olaplex+no+6&qid=1725811156&s=beauty&sprefix=olaplex+%2Cbeauty%2C135&sr=1-21-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9tdGY&psc=1"],
+                    "High porosity": ["https://www.amazon.com/Olaplex-Bond-Smoother-3-3-Fl/dp/B07PW4MTHV/ref=sr_1_1?crid=10R6AI2SQI4JW&dib=eyJ2IjoiMSJ9._BPmC6NbSQEKbOPnla7b447XaC0WuBmOsGy431zh1rWBjGJfq1XqxUVNI1j3VLgjrDSYj-bYDWOCCLlwiqRmG9__jl8tpgPk5lgHOHneMYIRZt-5NcaTDA4dWpcgeL3cc7_FWc0TJsads4lNiqx53ztNtrHak3rbY1t6CwpOAazgUCZgYAyrKH7OB9QLv5m0WINugsVow6T2-ybCsKGCk3g9e2t2OZwh3wnINNfslvCpGIQeV3ZOu316du20sxjNOEC1JPt2RvocP7u8InPIs6y2H90AYeQb9HB32UrlzYo.cbpT1SnGJyp_79IeuZ50EA67f5mnD6KvIfrXryQjARk&dib_tag=se&keywords=olaplex+no+6&qid=1725811239&s=beauty&sprefix=olaplex+%2Cbeauty%2C135&sr=1-1",
+                                    "https://www.amazon.com/dp/B01M4N4GOK/ref=sspa_dk_detail_2?psc=1&pf_rd_p=f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pf_rd_r=QFTN7N4VR74Y5YDEPH1A&pd_rd_wg=XsYb0&pd_rd_w=h9C5a&content-id=amzn1.sym.f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pd_rd_r=c52cdc3b-fa46-456f-8daf-c3dde191c1f8&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWxfdGhlbWF0aWM",
+                                    "https://www.amazon.com/sspa/click?ie=UTF8&spc=MToyODk3NDUyODQzOTA5MDY3OjE3MjU4MTEzMDM6c3BfZGV0YWlsMjozMDAxMTMyNDY4NTM1MDI6Ojo6&url=%2Fdp%2FB07NQLWYXW%2Fref%3Dsspa_dk_detail_3%3Fpsc%3D1%26pd_rd_i%3DB07NQLWYXW%26pd_rd_w%3DzMaDT%26content-id%3Damzn1.sym.953c7d66-4120-4d22-a777-f19dbfa69309%26pf_rd_p%3D953c7d66-4120-4d22-a777-f19dbfa69309%26pf_rd_r%3DCY5NRNBXG7627ZE21GQG%26pd_rd_wg%3DRdNZl%26pd_rd_r%3D54f2733a-dd7b-4300-a09a-88a5050f5dde%26s%3Dbeauty%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9kZXRhaWwy"]
+                },
+                "3a" : {
+                    "Low porosity": ["https://www.amazon.com/Innersense-Organic-Beauty-Leave-Cruelty-Free/dp/B004KM1OEK/ref=sr_1_4?crid=26FY3MNVTACIA&dib=eyJ2IjoiMSJ9.GGIqpKoNWqVbprrcyIMuN6vZFfFzpKPGmZnbtbkBwmvXPO3EFRqTRrYT4Xfy9iJW1ermsNL_QZcrYKyeBonNDdy95r79YgWIMA3cnzM_XUZDGxvBVh3dYvhOlgbDfr6VK-DFoS7ABYGgV-2UjpeXXq6KnemsIJLCSovtqXfV8MFT-zR2Ev_SB5YNvIicdqF2xaryhYADkg2hJRpkRX1n51d8tg46INqCUjyMjqFsNssy6nW4yGa85OtSFnhkSPvPnhLvGMlhaFUx4Fp5RepcXQcZMjFho4EufDUVaCu04lo.6UCMfk4muTE3iaR4gEA4kxAfw2MyTuB6hNRwLUw7sSw&dib_tag=se&keywords=innersense+leave+in&qid=1725812883&s=beauty&sprefix=innersense+leave+in%2Cbeauty%2C148&sr=1-4",
+                                    "https://www.amazon.com/dp/B09HCYF8MS/ref=sspa_dk_detail_8?psc=1&pd_rd_i=B09HCYF8MS&pd_rd_w=pzHhx&content-id=amzn1.sym.8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_p=8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_r=ZXFE7TTH822QZMMSH1KY&pd_rd_wg=r9lip&pd_rd_r=5ec9f80a-03bb-4337-9915-82cc2d049aee&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw",
+                                    "https://www.amazon.com/dp/B000VEJVCI/ref=sspa_dk_detail_4?psc=1&pf_rd_p=8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_r=ZXFE7TTH822QZMMSH1KY&pd_rd_wg=r9lip&pd_rd_w=pzHhx&content-id=amzn1.sym.8c2f9165-8e93-42a1-8313-73d3809141a2&pd_rd_r=5ec9f80a-03bb-4337-9915-82cc2d049aee&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw"],
+                    "Normal porosity": ["https://www.amazon.com/dp/B0BHM7TCLZ/ref=sspa_dk_detail_1?psc=1&pf_rd_p=f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pf_rd_r=KCDA5JP1N8Q4ARGF9FC9&pd_rd_wg=evUF3&pd_rd_w=TxCPu&content-id=amzn1.sym.f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pd_rd_r=c624428f-7b63-409a-b74f-2fdd16195eed&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWxfdGhlbWF0aWM",
+                                        "https://www.amazon.com/dp/B07NQHWHLM/ref=sspa_dk_detail_7?psc=1&pd_rd_i=B07NQHWHLM&pd_rd_w=2oNKh&content-id=amzn1.sym.8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_p=8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_r=MSHVMT0P36HCW8V0J2D4&pd_rd_wg=bpSmp&pd_rd_r=895cce22-db97-44da-bd0b-5b630425adc1&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw",
+                                        "https://www.amazon.com/dp/B07MGKNJJZ/ref=twister_B0CMZ9FL8Y?_encoding=UTF8&psc=1"],
+                    "High porosity": ["https://www.amazon.com/dp/B09DDC4G74/ref=sspa_dk_detail_8?psc=1&pd_rd_i=B09DDC4G74&pd_rd_w=ejI6L&content-id=amzn1.sym.8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_p=8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_r=73W5YB5N198GZXGK6PTS&pd_rd_wg=2IDQH&pd_rd_r=91c370f4-e775-4ad8-80ac-25f75a703044&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw",
+                                    "https://www.amazon.com/Herstyler-Hair-Serum-Vitamin-Straightening/dp/B00BC3YL2W/ref=pd_ci_mcx_pspc_dp_d_2_t_3?pd_rd_w=UdLp1&content-id=amzn1.sym.568f3b6b-5aad-4bfd-98ee-d827f03151e4&pf_rd_p=568f3b6b-5aad-4bfd-98ee-d827f03151e4&pf_rd_r=ZB1GW0DZNRVVTA7QCTB7&pd_rd_wg=QG5I3&pd_rd_r=ab2bca8f-5195-4398-9496-fb566b66c904&pd_rd_i=B00BC3YL2W",
+                                    "https://www.amazon.com/dp/B01LW9DIOS/ref=sspa_dk_detail_4?psc=1&pd_rd_i=B01LW9DIOS&pd_rd_w=aeKZO&content-id=amzn1.sym.953c7d66-4120-4d22-a777-f19dbfa69309&pf_rd_p=953c7d66-4120-4d22-a777-f19dbfa69309&pf_rd_r=ZB1GW0DZNRVVTA7QCTB7&pd_rd_wg=QG5I3&pd_rd_r=ab2bca8f-5195-4398-9496-fb566b66c904&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWwy"]
+                },
+                "3b" : {
+                    "Low porosity": ["https://www.amazon.com/dp/B07THLWGP3/ref=sspa_dk_detail_3?psc=1&pf_rd_p=f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pf_rd_r=8PPVZJAW4J1RXS7YTM8Y&pd_rd_wg=DuNyt&pd_rd_w=6dXp4&content-id=amzn1.sym.f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pd_rd_r=db98f09c-ad81-4c87-b92d-36755ac61fe9&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWxfdGhlbWF0aWM",
+                                    "https://www.amazon.com/dp/B000V1QTBM/ref=sspa_dk_detail_9?psc=1&pd_rd_i=B000V1QTBM&pd_rd_w=XoQRv&content-id=amzn1.sym.f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pf_rd_p=f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pf_rd_r=56VZX8HMP1D9YVQDN3Y2&pd_rd_wg=Roytn&pd_rd_r=b3f19c58-e308-47d3-a945-830e9e251c8b&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWxfdGhlbWF0aWM",
+                                    "https://www.amazon.com/dp/B0CW85XY71/ref=sspa_dk_detail_0?psc=1&pf_rd_p=f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pf_rd_r=XEPQ1H0JMYFJ2KCZNNYZ&pd_rd_wg=EYYqg&pd_rd_w=r1zqm&content-id=amzn1.sym.f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pd_rd_r=65b871c7-059c-4cb2-818c-e2f62b0e2550&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWxfdGhlbWF0aWM"],
+                    "Normal porosity": ["https://www.amazon.com/Shea-Moisture-Multi-Action-Leave-Insex-Treatment/dp/B07JJ3P7VQ/ref=sr_1_1_sspa?crid=2IYIETQF7DFSY&dib=eyJ2IjoiMSJ9.0DIf_tfFzk8pjp1xO66VSqRLkCfU3dhPwq3ENRHOLmkici4UXnX7g2yurPvk5jPdQ-IC6sY35JvytoRupI3C9iQhXC8ezsiAUnduwskwnpQRtEWttGS_7uzgfgDNPP8xtR77QmY7yHrqctr80m4r7TUNWV0LAJGSqzA0E9wSJWgP6KOlezlTYy1J54RroF6NYcp3dcTTHvZx6nLS7ZEDsW88E-YtVpBn1hxZdLSSdNOFIesW6DJMyE5VN9amsWjFNoaepBrs1s1vVgNhUaEMb7DLa01HMlYZCgkuN8himqE.lY2oXl0SHs0emE8DnizHawGkgahQZb5WnKcpDSUcaGg&dib_tag=se&keywords=leave+in+conditioner&qid=1725813658&s=beauty&sprefix=lea%2Cbeauty%2C159&sr=1-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1",
+                                        "https://www.amazon.com/dp/B0899C98ZD/ref=sspa_dk_detail_0?psc=1&pd_rd_i=B0899C98ZD&pd_rd_w=1HOjV&content-id=amzn1.sym.8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_p=8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_r=AV63H5PXSVPJXRVDPZXH&pd_rd_wg=GUbbu&pd_rd_r=4f861db7-0bba-426d-9728-35925bc2f4cb&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw",
+                                        "https://www.amazon.com/dp/B00SQ3VOPS/ref=sspa_dk_detail_5?psc=1&pd_rd_i=B00SQ3VOPS&pd_rd_w=QrN5D&content-id=amzn1.sym.953c7d66-4120-4d22-a777-f19dbfa69309&pf_rd_p=953c7d66-4120-4d22-a777-f19dbfa69309&pf_rd_r=V6BHNKBE4XN1560830JF&pd_rd_wg=eG4Nc&pd_rd_r=7c4f27c0-da10-4851-b26f-91a0570c0cac&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWwy"],
+                    "High porosity": ["https://www.amazon.com/As-Am-Leave-Conditioner-Ounce/dp/B0065R18TY/ref=sr_1_5_pp?crid=3G06JGTN2K715&dib=eyJ2IjoiMSJ9.1LcwfIUUp5cbgJgtnJqdnaZZ4hq4vDROdt_E8gi0HhL5UzIICQP6mYhXTuRSKLNr26ryu05-PumwzujFCG3lXf-rbvA82aexHiEtHwtJR-v-FjqbZ5xKMOuTrcFJibnB5Es4F4aWjkJxxDNGvJGpkG8zlHmlP1JcxqaTo22f6vwqqZNkWdA5HKzoH34CKkl-J2MdfRAURAaxdt6L6AtBw44FyBDV_dbaV2FL2U1lsQR6uN2da47JMNZtdvHmDLY-mdKzGoIrdCAvbUfSE6jp_jraTon3hgzkjuaINrGxZwU.dYJ6oT2-RSzeN0YyVfuTg2oE91Wn8P6qxp-hM5zcq9s&dib_tag=se&keywords=leave+in+conditioner+for+curly+hair&qid=1725813846&s=beauty&sprefix=leave+%2Cbeauty%2C162&sr=1-5",
+                                    "https://www.amazon.com/dp/B002HM3EM0/ref=sspa_dk_detail_2?psc=1&pd_rd_i=B002HM3EM0&pd_rd_w=F6P4O&content-id=amzn1.sym.8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_p=8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_r=5SXSKVKT5CK8ASJ8E558&pd_rd_wg=OCJ66&pd_rd_r=14b1c127-32e6-4bcf-9668-3bd16e10c619&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw",
+                                    "https://www.amazon.com/dp/B08P67N41H/ref=sspa_dk_detail_7?psc=1&pd_rd_i=B08P67N41H&pd_rd_w=UdRyu&content-id=amzn1.sym.953c7d66-4120-4d22-a777-f19dbfa69309&pf_rd_p=953c7d66-4120-4d22-a777-f19dbfa69309&pf_rd_r=F3DQQ46DCAC60AKWWG8S&pd_rd_wg=bvbAP&pd_rd_r=4cae7b4a-e054-44c9-8a9f-d7ea28ed22c1&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWwy"]
+                },
+                "3c" : {
+                    "Low porosity": ["https://www.amazon.com/dp/B06XGNFR66/ref=sspa_dk_detail_6?psc=1&pf_rd_p=f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pf_rd_r=T343SBFHHA2GRWA6D42C&pd_rd_wg=pFqK0&pd_rd_w=Inbzx&content-id=amzn1.sym.f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pd_rd_r=42bf5a02-eb70-452b-acc2-e816d5f7003a&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWxfdGhlbWF0aWM",
+                                    "https://www.amazon.com/dp/B0D3WN47MQ/ref=sspa_dk_detail_9?psc=1&pd_rd_i=B0D3WN47MQ&pd_rd_w=KnsXt&content-id=amzn1.sym.8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_p=8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_r=N8Q606Z1NG3WSMXVEG72&pd_rd_wg=htRez&pd_rd_r=3175b6dd-7b6e-4804-8f20-d2e0adfd5f26&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw",
+                                    "https://www.amazon.com/Monday-Moisture-Leave-Conditioner-Oz/dp/B0CS29PK2J/ref=pd_ci_mcx_pspc_dp_d_2_t_2?pd_rd_w=lcNV9&content-id=amzn1.sym.568f3b6b-5aad-4bfd-98ee-d827f03151e4&pf_rd_p=568f3b6b-5aad-4bfd-98ee-d827f03151e4&pf_rd_r=773RF1EMMSJBHNM2HPER&pd_rd_wg=hSPfp&pd_rd_r=3b6243bd-dc12-4ef0-9ac0-eff63fcaca69&pd_rd_i=B0CS29PK2J"],
+                    "Normal porosity": ["https://www.amazon.com/dp/B0CW85XY71/ref=sspa_dk_detail_2?psc=1&pd_rd_i=B0CW85XY71&pd_rd_w=vwbsx&content-id=amzn1.sym.8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_p=8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_r=H91PE1ZY5PDW6B3MWF11&pd_rd_wg=zgvCF&pd_rd_r=1927e556-4334-4a0c-8005-9ed7665736d1&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw",
+                                        "https://www.amazon.com/dp/B00LXOOI96/ref=sspa_dk_detail_7?psc=1&pd_rd_i=B00LXOOI96&pd_rd_w=n4Ggl&content-id=amzn1.sym.f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pf_rd_p=f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pf_rd_r=D53PTZVAJRE7SXFF8NPB&pd_rd_wg=rIkDs&pd_rd_r=494ce654-8df7-4009-b042-eac2aa67969a&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWxfdGhlbWF0aWM",
+                                        "https://www.amazon.com/dp/B07NLHV2M1/ref=sspa_dk_detail_9?psc=1&pd_rd_i=B07NLHV2M1&pd_rd_w=1rFKy&content-id=amzn1.sym.f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pf_rd_p=f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pf_rd_r=RCT14Q5R7H8Q4SWY0M77&pd_rd_wg=jn2e9&pd_rd_r=8335e820-f825-465d-84b0-b1979abda294&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWxfdGhlbWF0aWM"],
+                    "High porosity": ["https://www.amazon.com/dp/B08P67N41H/ref=sspa_dk_detail_7?psc=1&pd_rd_i=B08P67N41H&pd_rd_w=UdRyu&content-id=amzn1.sym.953c7d66-4120-4d22-a777-f19dbfa69309&pf_rd_p=953c7d66-4120-4d22-a777-f19dbfa69309&pf_rd_r=F3DQQ46DCAC60AKWWG8S&pd_rd_wg=bvbAP&pd_rd_r=4cae7b4a-e054-44c9-8a9f-d7ea28ed22c1&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWwy",
+                                    "https://www.amazon.com/dp/B0C78GNVMQ/ref=sspa_dk_detail_3?psc=1&pd_rd_i=B0C78GNVMQ&pd_rd_w=FOY5b&content-id=amzn1.sym.953c7d66-4120-4d22-a777-f19dbfa69309&pf_rd_p=953c7d66-4120-4d22-a777-f19dbfa69309&pf_rd_r=6CM3QXRCQSPMTB5SMFSA&pd_rd_wg=meLhU&pd_rd_r=50e40772-676b-4722-b80e-48a040f0d41e&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWwy",
+                                    "https://www.amazon.com/Living-Proof-Perfect-Styling-Treatment/dp/B00EX6BVO6/ref=sr_1_9?crid=35DPE6XULQ6BT&dib=eyJ2IjoiMSJ9.A4yH95Ag8pNLfgn7lQz3kuDpTC8zRUFEl2ysXHKxEKda89jLWRB7r0NsbCmDgluMHscKP7ffPEip7BvdzkeZoPbR1PUIKYpfEymVudAyvFp9JnL40dauuHlBIy3XZoF3YX0lCCnn8IfsDyIG7zRLdvXKtpc6_ndYk5wLsHoQ64hGuTYsEN-lKo9wtQ-kFhCq8mDRQY5XlmC3vjyr02RTPFmKPsoyCuE_yWoTqfFxrkC9tXFByi-F8me4w88Y9v7h9NoSljU_hOvCgjUs1aHHp2VlXI8lF37XyZXXq0UvSjI.EWkzImv0WjDXm-rO6E7MMFFauj-zh1Nh1A9MNazI-oc&dib_tag=se&keywords=living+proof+leave+in+conditioner+travel&qid=1725814304&sprefix=living+proof+le%2Caps%2C154&sr=8-9"]
+                },
+                "4a" : {
+                    "Low porosity": ["https://www.amazon.com/gp/aw/d/B07K6TWB9D/?_encoding=UTF8&pd_rd_plhdr=t&aaxitk=3f611c915e0bf163353029d67549bb30&hsa_cr_id=2360614030901&qid=1725816607&sr=1-3-9e67e56a-6f64-441f-a281-df67fc737124&ref_=sbx_be_s_sparkle_lsi4d_asin_2_title&pd_rd_w=Y5ENP&content-id=amzn1.sym.8591358d-1345-4efd-9d50-5bd4e69cd942%3Aamzn1.sym.8591358d-1345-4efd-9d50-5bd4e69cd942&pf_rd_p=8591358d-1345-4efd-9d50-5bd4e69cd942&pf_rd_r=V2NDD5FMX7T70WK50ZD6&pd_rd_wg=o139r&pd_rd_r=3a895a93-ecac-4c18-987b-0d2c69e6059b",
+                                    "https://www.amazon.com/dp/B088YDVP8W/ref=sspa_dk_detail_4?psc=1&pf_rd_p=8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_r=3T4X4KRDNQV390E7C1RM&pd_rd_wg=DVYkn&pd_rd_w=Nni3o&content-id=amzn1.sym.8c2f9165-8e93-42a1-8313-73d3809141a2&pd_rd_r=524d118c-7294-4e10-9125-90f4814c81a0&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw",
+                                    "https://www.amazon.com/MIZANI-Miracle-Milk-Leave-Conditioner/dp/B00XXO2K4O/ref=sr_1_1?crid=1P0DE6C5PV6VK&dib=eyJ2IjoiMSJ9.SalPrma2lvjhYPZhO6VU-YBIvWgEZLHd9xGoUmu04G2fcJvaeDRq39xJf-wS4-FXtmo4msyU19nhIGqY7AEc7jC0zx53iCfiUVlq6AVn3kr45VvTjzN5Uh9nJk5EQpKv_WXOyaeYHztOZGP3db77MkKNDLSm5nbj9JdKsmGWWFNxkxZvrxveGKEoFFCMBE2xs7rScUEhX4qXnPEchyj9q7nhiZTVy0RpucBZRYalHCYVkB4KcpajgAcRh0kJYtnlNgTHe4nD2hL8fU4dhK1PKUir9PDiIOB-LAG_dFmh8ow.duQABJK6EpVBBwJJ7L9ukA_WatCxSAfAGoGDrBfLFuo&dib_tag=se&keywords=mizani+25+miracle+milk+leave-in+treatment&qid=1725816778&s=beauty&sprefix=mizani+lea%2Cbeauty%2C146&sr=1-1"],
+                    "Normal porosity": ["https://www.amazon.com/dp/B0D9C6BW79/ref=sspa_dk_detail_7?psc=1&pf_rd_p=f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pf_rd_r=2TFFQFZ39JV9C92Y0B5Z&pd_rd_wg=tNVEh&pd_rd_w=YWqRY&content-id=amzn1.sym.f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pd_rd_r=f39dc4d8-199b-4bc2-b02d-a8373542eeb8&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWxfdGhlbWF0aWM",
+                                        "https://www.amazon.com/dp/B09F56QPTK/ref=sspa_dk_detail_3?psc=1&pd_rd_i=B09F56QPTK&pd_rd_w=vD5H4&content-id=amzn1.sym.953c7d66-4120-4d22-a777-f19dbfa69309&pf_rd_p=953c7d66-4120-4d22-a777-f19dbfa69309&pf_rd_r=HN1M9NR19T9DWZD1TYYZ&pd_rd_wg=4XO0L&pd_rd_r=71e4057a-fbd3-43e6-abd0-453a51cf4128&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWwy",
+                                        "https://www.amazon.com/Brazilian-Joia-Milky-Leave-In-Conditioner/dp/B0B1JPJ24Q/ref=pd_ci_mcx_pspc_dp_d_2_t_1?pd_rd_w=4ecvw&content-id=amzn1.sym.568f3b6b-5aad-4bfd-98ee-d827f03151e4&pf_rd_p=568f3b6b-5aad-4bfd-98ee-d827f03151e4&pf_rd_r=VDAJWB6XC7T955CS6Y8P&pd_rd_wg=elpi0&pd_rd_r=227b2710-4c7e-4670-a18f-01f6dc7591e8&pd_rd_i=B0B1JPJ24Q"],
+                    "High porosity": ["https://www.amazon.com/As-Am-Leave-Conditioner-Ounce/dp/B0065R18TY/ref=sr_1_1_pp?crid=1VHZAP9S95BT4&dib=eyJ2IjoiMSJ9.1LcwfIUUp5cbgJgtnJqdnQg7nD8vlzD3wuAP0PDDkEq40GDx_lxZaQyqroFE6pbuWEPxyJKzN4FLxE_MENXcJk_nTw2K9x37_PxEUj0bITOTErZ63FB1SE8QOG2hcUk0KEOtsCJ3Gjz-ylTx8_FWxIcwhf2kyI-uQ9f5jnJ3WviR77d2eG3R3BMfZX1iScfR2umx0YCSxMo67aN4lOTt82xns_FetDGR5cnW_gNiXcBLfblStm9kVNPoIF-pZcSTbfPIta5shRlTzazDBukjZ0z3cxZfcX7TdShzvVUPqEs.zwh1AxjSZwqs5HPE-JoSdqYIz0Yw5ambD1knSIR1slU&dib_tag=se&keywords=curly+leave+in+conditioner+for+curly+hair&qid=1725816951&s=beauty&sprefix=curly+lea%2Cbeauty%2C155&sr=1-1",
+                                    "https://www.amazon.com/dp/B08P67N41H/ref=sspa_dk_detail_2?psc=1&pd_rd_i=B08P67N41H&pd_rd_w=eaUyV&content-id=amzn1.sym.f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pf_rd_p=f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pf_rd_r=6A80E779X23KFGK55A7Y&pd_rd_wg=wJ6yI&pd_rd_r=7ccacb24-16d6-479e-983a-2befccab4403&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWxfdGhlbWF0aWM",
+                                    "https://www.amazon.com/dp/B0013EKQUQ/ref=sspa_dk_detail_5?psc=1&pd_rd_i=B0013EKQUQ&pd_rd_w=xLpSI&content-id=amzn1.sym.f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pf_rd_p=f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pf_rd_r=G2ZXHQ60JYXEEJKCA37G&pd_rd_wg=b4yRz&pd_rd_r=3eaf6d5a-053f-4739-a8c8-65eaf197c0d7&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWxfdGhlbWF0aWM"]
+                },
+                "4b" : {
+                    "Low porosity": ["https://www.amazon.com/Curlsmith-Weightless-Leave-Conditioner-Smooths/dp/B08N5CCKJ8/ref=sr_1_1?crid=2ROQNEF6CAFWD&dib=eyJ2IjoiMSJ9.hyI6-qPiFEHVgWXCJiIZAuWbTxaVYeO6pUhL8VjoQ0vnz5nUHbQ1zpueN0hFZSqb5iah1Tj_bdoYMUpK21znM5GH9IytxhSm3ygsIVgZ9Pz-2uLT18SHv-51s5Stv27Mvs_kx7hHzUFvNSn5FI66_XB3AuL_PNeX9E3LVJvbl1j7WYbg0gr3qjtT3VLQ-Pyr5pLLeSbamCepYEBjplMiJ50_yzkCPlKRvrI1amQRMpDXAWU4sMR-5m-fzYwh0pAWrCMLjJKmqTNaNarvmsw4TFB0Z0vzkcsPYMg-y5jzquc.JRmrECePRmciMVjjxPKxAb-H5oJSYYrx9Z8n9tDIg70&dib_tag=se&keywords=curlsmith+weightless+air+dry+cream&qid=1725817299&s=beauty&sprefix=curlsmith+%2Cbeauty%2C165&sr=1-1",
+                                    "https://www.amazon.com/sspa/click?ie=UTF8&spc=MToyMDkxMjUzOTIxMzcxMTg1OjE3MjU4MTczNDY6c3BfZGV0YWlsMjozMDAxMTQ1NzYwNDQ3MDI6Ojo6&url=%2Fdp%2FB07NQLWYXW%2Fref%3Dsspa_dk_detail_0%3Fpsc%3D1%26pf_rd_p%3D953c7d66-4120-4d22-a777-f19dbfa69309%26pf_rd_r%3D05ZK1SDJRGC48ZSR1MQX%26pd_rd_wg%3DwjedV%26pd_rd_w%3DtWKkj%26content-id%3Damzn1.sym.953c7d66-4120-4d22-a777-f19dbfa69309%26pd_rd_r%3Db6b65eca-03c5-486d-b5d5-3e0315be81e0%26s%3Dbeauty%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9kZXRhaWwy",
+                                    "https://www.amazon.com/dp/B07PVC9X5K/ref=sspa_dk_detail_3?psc=1&pf_rd_p=953c7d66-4120-4d22-a777-f19dbfa69309&pf_rd_r=CVG04MD97HVMN7NKRCQP&pd_rd_wg=KYb2Y&pd_rd_w=7knns&content-id=amzn1.sym.953c7d66-4120-4d22-a777-f19dbfa69309&pd_rd_r=8531cde9-52f0-4b6b-9a22-0344e9239e8a&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWwy"],
+                    "Normal porosity": ["https://www.amazon.com/Blueberry-Reparative-Leave-Conditioner-Ounces/dp/B01AZT1SK6/ref=sr_1_10?crid=14VQT3EF641MD&dib=eyJ2IjoiMSJ9.1LcwfIUUp5cbgJgtnJqdnQg7nD8vlzD3wuAP0PDDkEq40GDx_lxZaQyqroFE6pbuWEPxyJKzN4FLxE_MENXcJk_nTw2K9x37_PxEUj0bITOTErZ63FB1SE8QOG2hcUk0KEOtsCJ3Gjz-ylTx8_FWxIcwhf2kyI-uQ9f5jnJ3WviR77d2eG3R3BMfZX1iScfR2umx0YCSxMo67aN4lOTt82xns_FetDGR5cnW_gNiXcBLfblStm9kVNPoIF-pZcSTbfPIta5shRlTzazDBukjZ0z3cxZfcX7TdShzvVUPqEs.zwh1AxjSZwqs5HPE-JoSdqYIz0Yw5ambD1knSIR1slU&dib_tag=se&keywords=curly+leave+in+conditioner+for+curly+hair&qid=1725817441&s=beauty&sprefix=%2Cbeauty%2C129&sr=1-10",
+                                        "https://www.amazon.com/dp/B07JJ3P7VQ/ref=sspa_dk_detail_0?psc=1&pf_rd_p=f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pf_rd_r=K16NY366D70S8BRNZR4P&pd_rd_wg=TQ0sh&pd_rd_w=a64Sn&content-id=amzn1.sym.f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pd_rd_r=7829c9f7-b1b5-4b2b-83b8-deaf42f95018&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWxfdGhlbWF0aWM",
+                                        "https://www.amazon.com/dp/B00YO38G4Q/ref=sspa_dk_detail_7?psc=1&pd_rd_i=B00YO38G4Q&pd_rd_w=6fbEq&content-id=amzn1.sym.8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_p=8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_r=XCH755KTF9QADT3P9BY7&pd_rd_wg=XSrP9&pd_rd_r=564c11dd-8558-4cb9-ae09-017241f7b862&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw"],
+                    "High porosity": ["https://www.amazon.com/Mielle-Organics-Strengthening-Conditioner-Weightless/dp/B0BPR45NX4/ref=sr_1_15?crid=1F3EKHHRGJLY1&dib=eyJ2IjoiMSJ9.1LcwfIUUp5cbgJgtnJqdnQg7nD8vlzD3wuAP0PDDkEq40GDx_lxZaQyqroFE6pbuWEPxyJKzN4FLxE_MENXcJk_nTw2K9x37_PxEUj0bITOTErZ63FB1SE8QOG2hcUk0KEOtsCJ3Gjz-ylTx8_FWxIcwhf2kyI-uQ9f5jnJ3WviR77d2eG3R3BMfZX1iScfR2umx0YCSxMo67aN4lOTt82xns_FetDGR5cnW_gNiXcBLfblStm9kVNPoIF-pZcSTbfPIta5shRlTzazDBukjZ0z3cxZfcX7TdShzvVUPqEs.zwh1AxjSZwqs5HPE-JoSdqYIz0Yw5ambD1knSIR1slU&dib_tag=se&keywords=curly+leave+in+conditioner+for+curly+hair&qid=1725817560&rdc=1&s=beauty&sprefix=%2Cbeauty%2C271&sr=1-15",
+                                    "https://www.amazon.com/Aunt-Jackies-Intensive-Conditioner-Ultra-Hydrating/dp/B00O82IGRK/ref=sr_1_16?crid=1F3EKHHRGJLY1&dib=eyJ2IjoiMSJ9.1LcwfIUUp5cbgJgtnJqdnQg7nD8vlzD3wuAP0PDDkEq40GDx_lxZaQyqroFE6pbuWEPxyJKzN4FLxE_MENXcJk_nTw2K9x37_PxEUj0bITOTErZ63FB1SE8QOG2hcUk0KEOtsCJ3Gjz-ylTx8_FWxIcwhf2kyI-uQ9f5jnJ3WviR77d2eG3R3BMfZX1iScfR2umx0YCSxMo67aN4lOTt82xns_FetDGR5cnW_gNiXcBLfblStm9kVNPoIF-pZcSTbfPIta5shRlTzazDBukjZ0z3cxZfcX7TdShzvVUPqEs.zwh1AxjSZwqs5HPE-JoSdqYIz0Yw5ambD1knSIR1slU&dib_tag=se&keywords=curly+leave+in+conditioner+for+curly+hair&qid=1725817560&s=beauty&sprefix=%2Cbeauty%2C271&sr=1-16",
+                                    "https://www.amazon.com/dp/B08P67N41H/ref=sspa_dk_detail_1?psc=1&pf_rd_p=8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_r=1G5F39S6A2HKHEKCADYS&pd_rd_wg=QNIOi&pd_rd_w=FcUdW&content-id=amzn1.sym.8c2f9165-8e93-42a1-8313-73d3809141a2&pd_rd_r=f122d05f-956f-4ca7-b560-0e41131b0279&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw"]
+                },
+                "4c" : {
+                    "Low porosity": ["https://www.amazon.com/dp/B07PW4MTHV/ref=sspa_dk_detail_4?psc=1&pf_rd_p=f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pf_rd_r=7YJS80WG9AMJBZEMDBHQ&pd_rd_wg=pfrsc&pd_rd_w=IvA7N&content-id=amzn1.sym.f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pd_rd_r=ea22207b-7fb4-4d49-a979-96f076a70532&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWxfdGhlbWF0aWM",
+                                    "https://www.amazon.com/dp/B0CV9B56J7/ref=sspa_dk_detail_2?psc=1&pf_rd_p=f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pf_rd_r=7SBMWTPBBM5128TF8VD9&pd_rd_wg=Xf419&pd_rd_w=yIP25&content-id=amzn1.sym.f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pd_rd_r=8926e3d7-f89a-44da-bd10-afde0fe6be8a&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWxfdGhlbWF0aWM",
+                                    "https://www.amazon.com/dp/B0094KPK70/ref=vp_d_cpf-substitute-widget_pd?_encoding=UTF8&pf_rd_p=1b59e7f0-e58c-4cf4-9322-aea719e34a8a&pf_rd_r=M55ZM4SBECGHBSH8SW6R&pd_rd_wg=5v32g&pd_rd_i=B0094KPK70&pd_rd_w=89tG5&content-id=amzn1.sym.1b59e7f0-e58c-4cf4-9322-aea719e34a8a&pd_rd_r=b892da48-883d-4e5d-8c91-25b3d64776e5&psc=1"],
+                    "Normal porosity": ["https://www.amazon.com/OUAI-Curl-Cream-Hydrating-Anti-Frizz/dp/B08WG4CVSH/ref=sr_1_21_sspa?crid=2087A3VC2I3HV&dib=eyJ2IjoiMSJ9.1LcwfIUUp5cbgJgtnJqdnQg7nD8vlzD3wuAP0PDDkEq40GDx_lxZaQyqroFE6pbuWEPxyJKzN4FLxE_MENXcJk_nTw2K9x37_PxEUj0bITOTErZ63FB1SE8QOG2hcUk0KEOtsCJ3Gjz-ylTx8_FWxMJ0mLkGWo_xIueM-_d5ABkjgrX1-rVvxqfnZpsq05Uv2umx0YCSxMo67aN4lOTt82xns_FetDGR5cnW_gNiXcBLfblStm9kVNPoIF-pZcSTbfPIta5shRlTzazDBukjZ0z3cxZfcX7TdShzvVUPqEs.pvIG8VcWnLYmPc9lMlRrY0AIxUyN8_moXhLhe2KKqcw&dib_tag=se&keywords=curly+leave+in+conditioner+for+curly+hair&qid=1725818696&s=beauty&sprefix=%2Cbeauty%2C145&sr=1-21-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9tdGY&psc=1",
+                                        "https://www.amazon.com/dp/B083QZ7HWX/ref=sspa_dk_detail_2?psc=1&pd_rd_i=B083QZ7HWX&pd_rd_w=67qXg&content-id=amzn1.sym.8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_p=8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_r=MHT2XZW6BBQG0CYCXZJS&pd_rd_wg=L23mc&pd_rd_r=7fac55bb-af57-4fa7-83a0-efe19bf5af9d&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw",
+                                        "https://www.amazon.com/dp/B00FN3KF18/ref=sspa_dk_detail_5?psc=1&pf_rd_p=8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_r=MHT2XZW6BBQG0CYCXZJS&pd_rd_wg=L23mc&pd_rd_w=67qXg&content-id=amzn1.sym.8c2f9165-8e93-42a1-8313-73d3809141a2&pd_rd_r=7fac55bb-af57-4fa7-83a0-efe19bf5af9d&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw"],
+                    "High porosity": ["https://www.amazon.com/dp/B0CKBZFZYJ/ref=sspa_dk_detail_3?psc=1&pf_rd_p=8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_r=MHT2XZW6BBQG0CYCXZJS&pd_rd_wg=L23mc&pd_rd_w=67qXg&content-id=amzn1.sym.8c2f9165-8e93-42a1-8313-73d3809141a2&pd_rd_r=7fac55bb-af57-4fa7-83a0-efe19bf5af9d&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw",
+                                    "https://www.amazon.com/dp/B0CW85XY71/ref=sspa_dk_detail_4?psc=1&pf_rd_p=8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_r=MHT2XZW6BBQG0CYCXZJS&pd_rd_wg=L23mc&pd_rd_w=67qXg&content-id=amzn1.sym.8c2f9165-8e93-42a1-8313-73d3809141a2&pd_rd_r=7fac55bb-af57-4fa7-83a0-efe19bf5af9d&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw",
+                                    "https://www.amazon.com/Curlsmith-Multi-Tasking-Conditioner-Proteins-Damaged/dp/B08WR6Y3Z9/ref=sr_1_16?crid=MK255I8WON5Y&dib=eyJ2IjoiMSJ9.Is4QlfhpTkkMfnQHOdQMhv9Tz7ZhFGI-GZrzlzHBjF-2t-lqJomgJsKuPCyG1vylZUnPSAHMIDh0DtTxoW-YDMaUHRqw3gX4qd6mCT1whLajxTBRUHjrzdkjtao_eIjiufI7XtpGN1hPbzLRKY-3ni-d50ol2iAsSJiuwOUh38CpJIrCf9N_7kJg5IojyP7luimnQjp4P50NZ8nV7TBlnV3oigQs5_dRHnkpvqL3xTcHS6IxKLxA-gxrw--SSEN7GpigbYq_kQNt6mPA6c7v5OnvaQd6rhE6LHbNB7-5dEw.9mS27C7bhxDkwOjaBxQaa4-HEEXOXS82bzmuQ96xLvk&dib_tag=se&keywords=curlsmith+hair+products&qid=1725818998&s=beauty&sprefix=curlsm%2Cbeauty%2C162&sr=1-16"]
+                }
+            },
+            "styler": {
+                "soft": ["https://www.amazon.com/Curlsmith-Softly-Style-Styling-Natural/dp/B08KF1TYF7/ref=sr_1_5?crid=3PRGO2RWX8P8E&dib=eyJ2IjoiMSJ9.Gpw5RieuE5bCLWS-_EQA0V-eJgj1Te-0nBa2SXsyMSyp4FeEMjgkPq5CeXAGwH5-edbzW-pQ5Tnv0yCoFM6_dDZAKMVxIBkWEgcxoW7rcZBTMrdh-uwIMAixDzngdjYizkZCuVR9Ayn7fqvNh6fo2QMHlFP9ilTfTFGuzw7iQlwB5pLg67oGQ_s7aNK7Ro9lHBgqgIL1_cuQoa2BbvtppylSEUiDduZLRRnKjkeK67-kHcxHQUi4UQfJo1-qZ5VaqovjGoHtlEZMU9cflROF5gp2sk2OCuu_eacyVeEHZb0.V9oZI_Ih7wbgC3MqsTA3lAMK_Os-Wv8IUdJr71pAonQ&dib_tag=se&keywords=Hold+Me+Softly+Curly+Hair+Styling+Cream+Balm&qid=1725820824&s=beauty&sprefix=hold+me+softly+curly+hair+styling+cream+balm%2Cbeauty%2C227&sr=1-5",
+                        "https://www.amazon.com/Rizos-Curls-Defining-Definition-Maracuja/dp/B0CMT5ZCWM/ref=sr_1_3_sspa?crid=XR9JJ13DPQPW&dib=eyJ2IjoiMSJ9.XSRZF2WucSmRWxP17gX1rrkgi4pv9__6aEZ_KcUrovhDCp4PxVqjIRx6y2qahba25g_R5HpaiMIWawtRlK7uFpaSABbACtWS1HcHAkq20vnWYk8zNwgvX8TcZONP3LfzI_bX54zEccc90l7MuYqJQ-aB3tF1NpAFzzLIp2zBL4QXkyUF57NE1U63la24UfVfVy9FxcKEPkEjfgeu0GP6HlxaI5rVNP4lNwVJv1lfxAzJ7UIioR2j5gzo4I6h5cggev3_Oh3wBAGaeVKHajzRcYQxMurKWBsBuGyzVGH-r5A.vHuJgPwLCP0k-s1Wnpwy0gssisDh-Z3SK4TKrBTSyBE&dib_tag=se&keywords=soft+hold+curl&qid=1725820876&s=beauty&sprefix=soft+hold+curl+%2Cbeauty%2C174&sr=1-3-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1",
+                        "https://www.amazon.com/dp/B08R424SND/ref=sspa_dk_detail_2?psc=1&pd_rd_i=B08R424SND&pd_rd_w=ArCN9&content-id=amzn1.sym.8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_p=8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_r=AXBE708QT4D6SNHM7R72&pd_rd_wg=kM0Tm&pd_rd_r=16dc7c1d-dbe6-427a-9e08-62dd0c2f8c9e&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw"],
+                "volume": ["https://www.amazon.com/Curlsmith-Bouncy-Strength-Styling-Curly/dp/B08WPSW84H/ref=sr_1_7?crid=1AUJQUW0VMX4I&dib=eyJ2IjoiMSJ9.ahnXuP0Da4kKsJjyirQGsjOWzrAHk6YfUff3vZL_25dN6XMWsigvDyoXvDHzk3S2Bq1t_g28_ew9jVhJt8os78hiNJx81X96vLCL-K1ch2cNoGhtj71sto0MYcu7XIwE78ehYzX87oZcrssHXFy6BS-bRHBypxng3tx2tOsBNcJa1srBbs_nt3HgNLbXISg81wGCiNvoVxKPt-8e9RIi1xL_5ObwG2EXi95CmovrrszH31siGiETfWaFkA4R2IMaw3j-B9RVRwdWqJVk7_oisOTr1sMrUC2lh3jkq1QZXvE.TmxzXM-J4ssNJumRP1A0IAEA3MowCpT-CpPxEcDSDP0&dib_tag=se&keywords=curl+volume&qid=1725820983&s=beauty&sprefix=curl+volume%2Cbeauty%2C165&sr=1-7",
+                            "https://www.amazon.com/dp/B00147QL8S/ref=sspa_dk_detail_3?psc=1&pf_rd_p=953c7d66-4120-4d22-a777-f19dbfa69309&pf_rd_r=D08Z0E2C3G5QPAR99XWW&pd_rd_wg=kLqqq&pd_rd_w=npPDu&content-id=amzn1.sym.953c7d66-4120-4d22-a777-f19dbfa69309&pd_rd_r=43fc3d09-1077-4f9b-bc54-5f079163f1fd&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWwy",
+                            "https://www.amazon.com/Innersense-Organic-Create-Lift-Volumizing/dp/B079B3HKZK/ref=sr_1_14_sspa?crid=GWP5AGT0F1N4&dib=eyJ2IjoiMSJ9.ahnXuP0Da4kKsJjyirQGsjOWzrAHk6YfUff3vZL_25dN6XMWsigvDyoXvDHzk3S2Bq1t_g28_ew9jVhJt8os78hiNJx81X96vLCL-K1ch2cNoGhtj71sto0MYcu7XIwE78ehYzX87oZcrssHXFy6BS-bRHBypxng3tx2tOsBNcJa1srBbs_nt3HgNLbXISg81wGCiNvoVxKPt-8e9RIi1xL_5ObwG2EXi95CmovrrszH31siGiETfWaFkA4R2IMaw3j-B9RVRwdWqJVk7_oisOTr1sMrUC2lh3jkq1QZXvE.TmxzXM-J4ssNJumRP1A0IAEA3MowCpT-CpPxEcDSDP0&dib_tag=se&keywords=curl+volume&qid=1725821098&s=beauty&sprefix=curl+volume%2Cbeauty%2C148&sr=1-14-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9tdGY&psc=1"],
+                "light": ["https://www.amazon.com/OUAI-Anti-Frizz-Cream-Moisturizing/dp/B0CV9B56J7/ref=sr_1_4_sspa?crid=2MAX3GNNAO76M&dib=eyJ2IjoiMSJ9.YnCzB_M3PoM0ggZhAh-NecQv1x-Z47MITl0Xc2WSvTJEAAjbIFQA6UCNfz6dwnxZdZYM3dHPaGGdVOYVFJQfuQ3AMqI3coKCD-9hpGXO5h2HvvOQKOUAwRmrf53NjzzwUe0kfKRr-bQRLpTIBbSKLKcRFRWqVzEff0QozwnClviyWuQT1IhH5cRjOuftjlEjwcmLerPwkhe2SekwcOQkbDaMTrq-A-P-yDbk38aMML_RdxyNRHczCzzQC9xDrx1mPmcHbzDrkiwnuj0P-YK1AiH9w4DP4G04S8I9RKKF5tA.JoEoW6kqKefbqyhPGQ7C3Qx7IV6KjI71M-6V6s_rUqg&dib_tag=se&keywords=curl+frizz+control&qid=1725821147&s=beauty&sprefix=curl+frizz+%2Cbeauty%2C155&sr=1-4-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1",
+                            "https://www.amazon.com/OUAI-Curl-Cream-Hydrating-Anti-Frizz/dp/B08WG4CVSH/ref=sr_1_3_sspa?crid=ZA4SEFD5OLWG&dib=eyJ2IjoiMSJ9.vw8hQR_ZpdJdvhAKQ-J8mrsbTQh4iU9sATDnmUF4LKk8uLDpI_mPZIb0wC6hQCyE6cQftznNsUknmtPQjpTFUPyKzSNunATF7rC3N3GA5KTiUKv1amQMwvIPC0rlJswT9EVD3CkdwVyRku1robzTlz23XwWmZ2v8scI4IJvNH19yfsYQXehIdRKdJA2OZN75ZT6cN7ezQbPNGxgfc8w69_Cs8tjwZ1U7O5ILDWlb8pLvu2cFByp3jMOU6bygrASvgx3QXb6o3JhpdQ7OW8oH10PG_ZGbmPtDDvZYC24jSHU.utfwMp3tO80bYpcATuc2OB937k3k2fPllJi9RPRwEPY&dib_tag=se&keywords=light+hold+curl&qid=1725821192&s=beauty&sprefix=light+hold+curk%2Cbeauty%2C134&sr=1-3-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1",
+                            "https://www.amazon.com/dp/B0CCJZNP6P/ref=sspa_dk_detail_0?psc=1&pd_rd_i=B0CCJZNP6P&pd_rd_w=I24VO&content-id=amzn1.sym.8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_p=8c2f9165-8e93-42a1-8313-73d3809141a2&pf_rd_r=YJG3CXWCPTRWT9K9PY1A&pd_rd_wg=2uQ7R&pd_rd_r=35b57485-b6a7-46d2-8f94-55a245a161db&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw&smid=A10AQIRJF8GXVW"],
+                "medium": ["https://www.amazon.com/Definition-Protection-Formulated-Silicone-Free-Paraben-Free/dp/B0CW7QHN4S/ref=sr_1_1_sspa?crid=2NST4TOFS133M&dib=eyJ2IjoiMSJ9.pBkfBGziYIMgvwYDYt9X--ygmJ4pF3BprBXEAHoBs8BLUrOLZgZ7lnL4Hh_RLbv3aVGWmBxffQMtz82JjAsE1uUFz_m_K8w5z-_Oo6qggzmYtAqp1fNd3bW4AUDMwEM0W5Nd_iV7eJfcC0uTivhIGM-3YnYxR6MaMyEuHs0Jx8yZ-EtpUwj32ChosCKLLcTSQj2iDpXQEfWeHLk_xfg6q-Y1ivRerNhBOdC6T-b93DGzz9MmWp4rtiUPQS4RlaxHZFGmRViPuaNTsthPB7QOMObGZkOdNYOi7iICZi7v_1Y.kjLO_JCnoRWk0XLFZoXi7e4Maoh3Jzf_SZXGkzvMQsc&dib_tag=se&keywords=curling+cream+for+curly+hair&qid=1725821293&s=beauty&sprefix=curling+cre%2Cbeauty%2C137&sr=1-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1",
+                            "https://www.amazon.com/dp/B07NNYKYW4/ref=sspa_dk_detail_1?pd_rd_i=B08RCC44SL&pd_rd_w=Gm2sr&content-id=amzn1.sym.f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pf_rd_p=f2f1cf8f-cab4-44dc-82ba-0ca811fb90cc&pf_rd_r=J3BCD3KB69SH9PVRBKTV&pd_rd_wg=98rw8&pd_rd_r=127d0880-59af-48ae-aa4e-b1d49e9c2a39&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWxfdGhlbWF0aWM&th=1",
+                            "https://www.amazon.com/dp/B004J1MNII/ref=sspa_dk_detail_2?psc=1&pf_rd_p=953c7d66-4120-4d22-a777-f19dbfa69309&pf_rd_r=ZA9268GM1B28VHEQ48DZ&pd_rd_wg=4wfBG&pd_rd_w=cPsFH&content-id=amzn1.sym.953c7d66-4120-4d22-a777-f19dbfa69309&pd_rd_r=f498e749-7704-4b73-a907-380aedd1c3fd&s=beauty&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWwy"],
+                "strong": ["https://www.amazon.com/Sculpting-Crunch-Free-Flake-Free-Squalane-Silicone-Free/dp/B0CW7NY1CP/ref=sr_1_8?crid=MOBL8X1JL7TD&dib=eyJ2IjoiMSJ9.8z1OI7y9hgMNF3P7rSGEZV8RGnXpBKc3hwzjZJ3VOYPgTfNdqy60JFw10_OkjE_9yUAaOq6I312-EhOmcKEtWM-4irKRWkmm5ooYjoBxurYXmn46nUvqCFcMJVTraAk1gpe3zGIRZWghZnXrRT6-2nHfnNLJHF0EmYQciYLmk4a9kcFhfNkSaXPPibtSvowPtCG05b6M0ffu53KGxUQ9NjqvWUa34wwKZbgigDauHu7gGXwbatiEJmAG5VxV-zRlKJQtz8h7dRE1tbLcNE2IcU_YftIg4VWCc9J2Q-QY4PA.xnl5Z6vgpY2EUKkwVLS-OjYVTApaNrRv61DGGD7-tBg&dib_tag=se&keywords=strong+hold+curls&qid=1725821441&s=beauty&sprefix=strong+hold+curls%2Cbeauty%2C154&sr=1-8",
+                            "https://www.amazon.com/CURLSMITH-Curlsmith-In-Shower-Style-Fixer/dp/B07WGDCRFR/ref=sr_1_34?crid=MOBL8X1JL7TD&dib=eyJ2IjoiMSJ9.8z1OI7y9hgMNF3P7rSGEZV8RGnXpBKc3hwzjZJ3VOYPgTfNdqy60JFw10_OkjE_9yUAaOq6I312-EhOmcKEtWM-4irKRWkmm5ooYjoBxurYXmn46nUvqCFcMJVTraAk1gpe3zGIRZWghZnXrRT6-2nHfnNLJHF0EmYQciYLmk4a9kcFhfNkSaXPPibtSvowPtCG05b6M0ffu53KGxUQ9NjqvWUa34wwKZbgigDauHu7gGXwbatiEJmAG5VxV-zRlKJQtz8h7dRE1tbLcNE2IcU_YftIg4VWCc9J2Q-QY4PA.xnl5Z6vgpY2EUKkwVLS-OjYVTApaNrRv61DGGD7-tBg&dib_tag=se&keywords=strong+hold+curls&qid=1725821441&s=beauty&sprefix=strong+hold+curls%2Cbeauty%2C154&sr=1-34",
+                            "https://www.amazon.com/Innersense-Organic-Beauty-Create-Styling/dp/B002EOUQR2/ref=sr_1_3_sspa?crid=KJSX9PFG0Y6F&dib=eyJ2IjoiMSJ9.gm5G5yEL0SSP8P0GprX39Oo_Jq9bo3zKs146NUTzdmK2pJ_fijR8LBJjRAEN_qjtX_7IUIqMUEHayeZiJbEJxAiiYmjjaRpV1eC4CmXV1uhKvNToo_E5RDEK-f_GUxapjhgArGYutajoTlbbFLtYiQB3cmYjpho4vPhl6fwddnfIsHsErnX0P2yEJwCISJM8jaiGCEaO6GQ6l6hI9SES1thJDP0HDj8TxIzK_ddopXF6J9zLCHvFQVPcNVwYv25qBA1lCkfUuTtvMl1en05Qx-_ebzsjOAaQBfSMfBsYzlA.XWCL5dNrR_sjhHSEs1GNfaqSyUO84oQ5l_1Q2GdWEdo&dib_tag=se&keywords=innersense+hair+products+curl&qid=1725821540&s=beauty&sprefix=inner%2Cbeauty%2C157&sr=1-3-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1"]
+            }
+
+        }
+
+        function updateProductImages() {
+            const hairtype = localStorage.getItem("checkedvalue1");
+            const porosity = localStorage.getItem("checkedvalue2");
+            const look = localStorage.getItem("checkedvalue6");
+
+            // Update shampoo images
+            for (let i = 1; i <= 3; i++) {
+                const shampooImage = document.getElementById(`shampoo${i}`);
+                const shampooLink = document.getElementById(`shampooLink${i}`);
+
+                // Update image src and display
+                shampooImage.src = imagePaths.shampoo[hairtype][i - 1];
+                shampooImage.style.display = "block";
+
+                // Update link href
+                shampooLink.href = productLinks.shampoo[hairtype][i - 1];
+            }
+
+            // Update conditioner images
+            for (let i = 1; i <= 3; i++) {
+                const conditionerImage = document.getElementById(`conditioner${i}`);
+                const conditionerLink = document.getElementById(`conditionerLink${i}`);
+
+                // Update image src and display
+                conditionerImage.src = imagePaths.conditioner[hairtype][i - 1];
+                conditionerImage.style.display = "block";
+
+                // Update link href
+                conditionerLink.href = productLinks.conditioner[hairtype][i - 1];
+            }
+
+            // Update leave-in conditioner based on porosity
+            for (let i = 1; i <= 3; i++) {
+                const leaveInImage = document.getElementById(`leaveIn${i}`);
+                const leaveInLink = document.getElementById(`leaveInLink${i}`);
+
+                // Update image src and display
+                leaveInImage.src = imagePaths.leaveIn[hairtype][porosity][i - 1];
+                leaveInImage.style.display = "block";
+
+                // Update link href
+                leaveInLink.href = productLinks.leaveIn[hairtype][porosity][i - 1];
+            }
+
+            // Update styler based on intended look
+
+            for (let i = 1; i <= 3; i++) {
+                const stylerImage = document.getElementById(`styler${i}`);
+                const stylerLink = document.getElementById(`stylerLink${i}`);
+
+                // Update image src and display
+                stylerImage.src = imagePaths.styler[look][i - 1];
+                stylerImage.style.display = "block";
+
+            
+                // Update link href
+                if (stylerLink) {
+                    console.log(`productLinks.styler[${look}][${i - 1}]:`, productLinks.styler[look][i - 1]);
+                    stylerLink.href = productLinks.styler[look][i - 1];
+                } else {
+                    console.log(`stylerLink${i} does not exist`);
+                }
+                    
+            }
+
+
+
+        }
+
+        window.onload = updateProductImages();
+        window.onload = function() {
+            myFunction();
+        } 
+
+
+        </script>
+
+        <a href="curly-quiz-page1.html"><button class="button button4">Retake Quiz</button></a>
+            
+        
+        <section id="disclaimer" class="disclaimer-section">
+            <div class="container">
+                <p>Please note that all the information provided on this website is backed by research and expert opinion, but it has not been tested on all hair types. We do not receive any commission from the products advertised or recommended on this site. Our goal is to provide you with the best advice based on available research to help you make informed decisions about your hair care routine.</p>
+            </div>
+        </section>
+        
+        <footer class="footer">
+            <p>The Curl Guidance 2022 Ⓒ</p>
+        </footer>
+    </body>
+</html>
